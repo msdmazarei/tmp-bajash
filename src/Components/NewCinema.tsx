@@ -8,19 +8,19 @@ data:IPlaceModel
 }
 
 interface IState{
-name:string,
-description:string,
-address:string
+name?:string,
+description?:string,
+address?:string
 }
 
-export class NewPlace extends Component<IProps,IState>{
+export class NewCinema extends Component<IProps,IState>{
 
 constructor(props:IProps) {
     super(props)
     this.state = {
-        name : this.props.data.name,
-        description: this.props.data.description,
-        address:this.props.data.address
+        // name : this.props.data.name,
+        // description: this.props.data.description,
+        // address:this.props.data.address
         
     }
 }
@@ -37,11 +37,11 @@ console.log(e.target)
     render() {
         return(
             <div>
-                <Form onSubmit={()=>{}}>
+                <Form>
   <Form.Row>
     <Form.Group as={Col}>
       <Form.Label>{ETranslator.NAME}</Form.Label>
-      <Form.Control type="text" placeholder={ETranslator.ENTER_NAME} name="hh" onChange={this.handleInput} value={this.state.name}/>
+      <Form.Control type="text" placeholder={ETranslator.ENTER_NAME} name="hh" onChange={this.handleInput} value=""/>
     </Form.Group>
 
     <Form.Group as={Col}>

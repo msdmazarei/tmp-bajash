@@ -5,9 +5,9 @@ import {ETranslator} from "../Constants/Translator"
 import {Link} from "react-router-dom"
 
 interface IProps {
-    dataList:Array<IPlaceModel>
-    ShowDetailList:any
-  //  formPage():void
+    dataList:Array<IPlaceModel>,
+    route : string
+   
 }
 interface IState{}
 
@@ -26,8 +26,8 @@ render() {
     return (
         <Accordion defaultActiveKey="0">
              <Card>
-             <Link to="/newplace">
-          <Accordion.Toggle eventKey="1" onClick={this.openNewPage}>
+             <Link to={`${this.props.route}/newcinema`}>
+          <Accordion.Toggle eventKey="1">
            {ETranslator.ADD}
           </Accordion.Toggle>
           </Link>
@@ -41,7 +41,7 @@ render() {
                      {item.name}
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey= { ` ${index}`}>
-                      <Card.Body><this.props.ShowDetailList  placeDetail={item}/></Card.Body>
+                      <Card.Body>hello</Card.Body>
                     </Accordion.Collapse>
                   </Card>
                 )

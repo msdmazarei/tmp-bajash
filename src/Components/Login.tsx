@@ -1,30 +1,27 @@
 import React , {Component} from "react"
-import {ListSearch} from "../Container/List"
-import {PlaceComponent} from "./PlaceComponent"
-const fakeData = [
-    {
-        name:"azadi",
-        description:"aa",
-        address:"enghelab"
-    },
-    {
-        name:"azadi1",
-        description:"aa1",
-        address:"enghelab1"
-    },
-    {
-        name:"azadi2",
-        description:"aa2",
-        address:"enghelab2"
-    }
-]
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-export class Login extends Component{
+
+interface IProps extends RouteComponentProps<any> {
+   /* Parent component's props*/
+}
+
+interface IState {
+
+}
+
+ class Login extends Component<IProps,IState>{
+    constructor(props:IProps) {
+        super(props)
+    }
     render() {
+        this.props.history.replace(`/cinemas` )
         return(
             <div>
-                <ListSearch dataList={fakeData} ShowDetailList={PlaceComponent}/>
+               login
             </div>
         )
     }
 }
+
+export default withRouter(Login)
