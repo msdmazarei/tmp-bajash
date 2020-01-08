@@ -5,19 +5,23 @@ import { Provider } from "react-redux";
  import {routes} from "../Constants/Routs"
  import { BrowserRouter, Route, Switch } from 'react-router-dom'
  import {Login} from "./Login"
+ import {Unavailable} from "./Unavailable"
+ import {Store,persistor} from "../Redux/Store/Store"
+ import { PersistGate } from 'redux-persist/integration/react'
 
 const App: React.FC = () => {
-  let store = createStore(reducer)
  
   return (
     <div>
-      <Provider store={store}>
+      <Provider store={Store}>
+      <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
 <Switch>
-  <Route name="admin" path={routes.LOGIN} exact component={Login}/>
+  <Route name="login" path={routes.LOGIN} exact component={Login}/>
+  <Route name="unavailable" component={Unavailable}/>
   </Switch>
   </BrowserRouter>
-
+</PersistGate>
       </Provider>
     </div>
   );
