@@ -37,12 +37,14 @@ render() {
             this.props.dataList.map((item:IPlaceModel,index:number)=>{
                 return(
                     <Card key={index}>
+                         <Link to={`${this.props.route}/:${item.name}`}>
                     <Accordion.Toggle as={Card.Header} eventKey={ ` ${index}`}>
                      {item.name}
                     </Accordion.Toggle>
-                    <Accordion.Collapse eventKey= { ` ${index}`}>
+                    </Link>
+                    {/* <Accordion.Collapse eventKey= { ` ${index}`}>
                       <Card.Body>hello</Card.Body>
-                    </Accordion.Collapse>
+                    </Accordion.Collapse> */}
                   </Card>
                 )
             }):""}
