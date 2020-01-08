@@ -1,6 +1,4 @@
 import React , {Component} from "react"
-import {ListSearch} from "../Container/List"
-import {PlaceComponent} from "./PlaceComponent"
 const fakeData = [
     {
         name:"azadi",
@@ -23,7 +21,7 @@ export class Login extends Component{
     render() {
         return(
             <div>
-                <ListSearch dataList={fakeData} ShowDetailList={PlaceComponent}/>
+               login
             </div>
         )
     }

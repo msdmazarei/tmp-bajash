@@ -8,13 +8,7 @@ import { Provider,connect } from "react-redux";
  import {Unavailable} from "./Unavailable"
  import {Store,persistor} from "../Redux/Store/Store"
  import { PersistGate } from 'redux-persist/integration/react'
- import {NewPlace} from "./NewPlace" 
 
- import { withRouter, RouteComponentProps } from "react-router-dom";
-
-// interface Props extends RouteComponentProps<any> {
-//    /* Parent component's props*/
-// }
 interface IProps{}
 
 function App(props:IProps) { 
@@ -26,7 +20,6 @@ function App(props:IProps) {
       <BrowserRouter>
 <Switch>
   <Route name="login" path={routes.LOGIN} exact component={Login}/>
-  <Route path="/newplace" component={NewPlace}/>
   <Route name="unavailable" component={Unavailable}/>
   </Switch>
   </BrowserRouter>
