@@ -1,8 +1,39 @@
 import React , {Component} from "react"
 import {Form, Col,Button} from "react-bootstrap"
 import {ETranslator} from "../Constants/Translator"
+import {IPlaceModel } from "../Models/PlaceModel"
 
-export class NewPlace extends Component{
+interface IProps{
+data:IPlaceModel
+}
+
+interface IState{
+name:string,
+description:string,
+address:string
+}
+
+export class NewPlace extends Component<IProps,IState>{
+
+constructor(props:IProps) {
+    super(props)
+    this.state = {
+        name : this.props.data.name,
+        description: this.props.data.description,
+        address:this.props.data.address
+        
+    }
+}
+
+
+
+
+
+    handleInput = (e:any)=>{
+console.log(e.target)
+        this.setState({name:e.target.value})
+    }
+
     render() {
         return(
             <div>
@@ -10,12 +41,12 @@ export class NewPlace extends Component{
   <Form.Row>
     <Form.Group as={Col}>
       <Form.Label>{ETranslator.NAME}</Form.Label>
-      <Form.Control type="text" placeholder={ETranslator.ENTER_NAME} />
+      <Form.Control type="text" placeholder={ETranslator.ENTER_NAME} name="hh" onChange={this.handleInput} value={this.state.name}/>
     </Form.Group>
 
     <Form.Group as={Col}>
         <Form.Label>{ETranslator.DESCRIPTION}</Form.Label>
-      <Form.Control type="TEXT" placeholder={ETranslator.DESCRIPTION} />
+      <Form.Control type="text" placeholder={ETranslator.DESCRIPTION} />
     </Form.Group>
   </Form.Row>
 

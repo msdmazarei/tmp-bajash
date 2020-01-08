@@ -1,1 +1,1 @@
-export {App as default} from "./Components/App"
+export const aa = ()=>{}

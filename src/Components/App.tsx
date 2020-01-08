@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStore} from "redux"
-import { Provider } from "react-redux";
+import { Provider,connect } from "react-redux";
  import {reducer} from "../Redux/Reducers/Reducer"
  import {routes} from "../Constants/Routs"
  import { BrowserRouter, Route, Switch } from 'react-router-dom'
@@ -8,10 +8,17 @@ import { Provider } from "react-redux";
  import {Unavailable} from "./Unavailable"
  import {Store,persistor} from "../Redux/Store/Store"
  import { PersistGate } from 'redux-persist/integration/react'
- import {NewPlace} from "./NewPlace"
+ import {NewPlace} from "./NewPlace" 
 
-const App: React.FC = () => {
- 
+ import { withRouter, RouteComponentProps } from "react-router-dom";
+
+// interface Props extends RouteComponentProps<any> {
+//    /* Parent component's props*/
+// }
+interface IProps{}
+
+function App(props:IProps) { 
+  console.log(props)
   return (
     <div>
       <Provider store={Store}>
@@ -29,4 +36,4 @@ const App: React.FC = () => {
   );
 }
 
-export {App};
+export  {App}
