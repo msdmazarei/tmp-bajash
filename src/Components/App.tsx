@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
  import {Unavailable} from "./Unavailable"
  import {Store,persistor} from "../Redux/Store/Store"
  import { PersistGate } from 'redux-persist/integration/react'
+ import {NewPlace} from "./NewPlace"
 
 const App: React.FC = () => {
  
@@ -18,6 +19,7 @@ const App: React.FC = () => {
       <BrowserRouter>
 <Switch>
   <Route name="login" path={routes.LOGIN} exact component={Login}/>
+  <Route path="/newplace" component={NewPlace}/>
   <Route name="unavailable" component={Unavailable}/>
   </Switch>
   </BrowserRouter>

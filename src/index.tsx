@@ -2,6 +2,7 @@ import React  from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
  import {App} from './Components/App';
+ import 'bootstrap/dist/css/bootstrap.min.css';
 const MyApp = React.lazy(()=>import("./MyApp"))
 // import * as serviceWorker from './serviceWorker';
 
