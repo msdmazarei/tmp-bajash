@@ -64,12 +64,13 @@ constructor(props:any) {
       return (
         <ButtonToolbar>
 <Button 
+ disabled={this.controlEmpty()}
         onClick={this.submitForm}
-       variant="outline-primary"   
+       variant="primary"   
       >
          {ETranslator.SAVE}
        </Button>
-      <Button onClick={this.handleCancel} variant="outline-secondary">{ETranslator.CANCEL}</Button>
+      <Button onClick={this.handleCancel} variant="secondary">{ETranslator.CANCEL}</Button>
       
       </ButtonToolbar>
         
@@ -87,12 +88,27 @@ constructor(props:any) {
       this.props.history.replace(`/cinemas` )
     }
 
+    handleDeletCinema = () => {
+      const {name,description,address}= this.state
+      this.props.deleteCinema({name:name,description:description,address:address},
+        this.props.cinemas.reducerEditCinema.index)
+      this.props.history.replace(`/cinemas` )
+    }
+
+    controlEmpty = () => {
+      const {name,address,description} = this.state
+      if (name ===""|| address ==="" || description ==="") {
+        return true
+      }
+      return false
+    }
+
     editButton = () =>{
       return (
         <ButtonToolbar>
-  <Button variant="outline-primary" onClick={this.handleEdit}>{ETranslator.SAVE}</Button>
-  <Button variant="outline-danger">{ETranslator.DELETE}</Button>
-  <Button variant="outline-secondary" onClick={this.handleCancel}>{ETranslator.CANCEL}</Button>
+  <Button disabled={this.controlEmpty()} className="margin-button" variant="primary" onClick={this.handleEdit}>{ETranslator.SAVE}</Button>
+  <Button  className="margin-button" variant="danger" onClick={this.handleDeletCinema}>{ETranslator.DELETE}</Button>
+  <Button  className="margin-button" variant="secondary" onClick={this.handleCancel}>{ETranslator.CANCEL}</Button>
 
 </ButtonToolbar>
       )
@@ -100,10 +116,9 @@ constructor(props:any) {
 
 
     render() {
-      console.log(this.props)
         return(
             <div>
-                <Form>
+                <Form className="align-right">
   <Form.Row>
     <Form.Group as={Col}>
       <Form.Label>{ETranslator.NAME}</Form.Label>
@@ -115,20 +130,7 @@ constructor(props:any) {
        onChange={this.handleInput} 
       />
     </Form.Group>
-
-    <Form.Group as={Col}>
-        <Form.Label>{ETranslator.DESCRIPTION}</Form.Label>
-      <Form.Control 
-      type="text" 
-      name="description"
-      value = {this.state.description}
-      onChange={this.handleInput} 
-      placeholder={ETranslator.DESCRIPTION}
-       />
-    </Form.Group>
-  </Form.Row>
-
-  <Form.Group>
+    <Form.Group  as={Col}>
         <Form.Label>{ETranslator.ADDRESS}</Form.Label>
     <Form.Control 
     type="text" 
@@ -138,6 +140,20 @@ constructor(props:any) {
     placeholder="..." />
   </Form.Group>
 
+
+  </Form.Row>
+
+
+  <Form.Group>
+        <Form.Label>{ETranslator.DESCRIPTION}</Form.Label>
+      <Form.Control 
+      type="text" 
+      name="description"
+      value = {this.state.description}
+      onChange={this.handleInput} 
+      placeholder={ETranslator.DESCRIPTION}
+       />
+    </Form.Group>
   
   <Form.Row>   
   </Form.Row>

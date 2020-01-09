@@ -4,6 +4,7 @@ import {IPlaceModel} from "../../Models/PlaceModel"
 import {onEditCinema} from "../Actions/onEditCinema"
 import {editCinema} from "../Actions/onEditCinema"
 import {IstateEditCinema} from "../../Models/CinemaModel"
+import {deleteCinema} from "../Actions/DeleteCinema"
 
 export const mapDispatchToProps= (dispatch:any)=>{
     return{
@@ -19,6 +20,9 @@ export const mapDispatchToProps= (dispatch:any)=>{
         },
         editCinema :(data:IPlaceModel,index:number)=>{
             dispatch(editCinema(data,index))
-        }
+        },
+        deleteCinema : (data:IPlaceModel,index:number)=>{
+            dispatch(deleteCinema(data,index))
+        },
     }
 }

@@ -28,6 +28,11 @@ export const reducerAddCinema = (state:Array<IPlaceModel> = [] , action:any)=>{
                     ...state2.slice(0,action.index),action.data,
                    ...state2.slice(action.index+1)
                  ]
+                 case EActionTypes.DELETE_CINEMA:
+                  return  [
+                        ...state2.slice(0,action.index),
+                       ...state2.slice(action.index+1)
+                     ] 
 
         default:
             return state
