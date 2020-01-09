@@ -1,5 +1,5 @@
 import React , {Component} from "react"
-import {Form, Col,Button} from "react-bootstrap"
+import {Form, Col,Button,ButtonToolbar} from "react-bootstrap"
 import {ETranslator} from "../Constants/Translator"
 import {IPlaceModel } from "../Models/PlaceModel"
 import { connect } from "react-redux";
@@ -12,6 +12,7 @@ interface IProps extends RouteComponentProps<any> {
  
 cinema:IPlaceModel
 addCinema(data:IPlaceModel):void
+
 }
 
 
@@ -21,17 +22,14 @@ description:string,
 address:string
 }
 
-class NewCinema1 extends Component<IProps,IState>{
+class NewCinema1 extends Component<any,IState>{
 
 constructor(props:any) {
     super(props)
     this.state = {
-        // name : this.props.data.name,
-        // description: this.props.data.description,
-        // address:this.props.data.address
-         name :"",
-        description: "",
-        address:""
+         name : this.props.cinemas.reducerEditCinema.name,
+        description: this.props.cinemas.reducerEditCinema.description,
+        address:this.props.cinemas.reducerEditCinema.address 
         
     }
 }
@@ -62,9 +60,41 @@ constructor(props:any) {
     // console.log("hello")
     }
 
+    newButton = () =>{
+      return (
+        <ButtonToolbar>
+<Button 
+        onClick={this.submitForm}
+       variant="outline-primary"   
+      >
+         {ETranslator.SAVE}
+       </Button>
+      <Button onClick={this.handleCancel} variant="outline-secondary">{ETranslator.CANCEL}</Button>
+      
+      </ButtonToolbar>
+        
+      )
+    }
+
+    handleCancel = ()=>{
+      this.props.history.replace(`/cinemas` )
+    }
+
+    editButton = () =>{
+      return (
+        <ButtonToolbar>
+  <Button variant="outline-primary">{ETranslator.SAVE}</Button>
+  <Button variant="outline-danger">{ETranslator.DELETE}</Button>
+  <Button variant="outline-secondary" onClick={this.handleCancel}>{ETranslator.CANCEL}</Button>
+
+</ButtonToolbar>
+      )
+    }
+
+
     render() {
      // localStorage.removeItem("*")
-      
+     console.log(this.props.match.params.id)
         return(
             <div>
                 <Form>
@@ -85,6 +115,7 @@ constructor(props:any) {
       <Form.Control 
       type="text" 
       name="description"
+      value = {this.state.description}
       onChange={this.handleInput} 
       placeholder={ETranslator.DESCRIPTION}
        />
@@ -96,6 +127,7 @@ constructor(props:any) {
     <Form.Control 
     type="text" 
     name="address"
+    value = {this.state.address}
     onChange={this.handleInput} 
     placeholder="..." />
   </Form.Group>
@@ -103,12 +135,8 @@ constructor(props:any) {
   
   <Form.Row>   
   </Form.Row>
-  <Button 
-   onClick={this.submitForm}
-  variant="primary"   
- >
-    Submit
-  </Button>
+  {this.props.match.params.id ==="newcinema"?this.newButton():this.editButton()}
+
 </Form>
 
             </div>

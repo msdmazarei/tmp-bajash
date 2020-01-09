@@ -1,28 +1,56 @@
 import React ,{Component} from "react"
-import {Accordion,Card,Table} from "react-bootstrap"
+import {Accordion,Card,Table, Button} from "react-bootstrap"
 import {IPlaceModel} from "../Models/PlaceModel"
 import {ETranslator} from "../Constants/Translator"
 import {Link} from "react-router-dom"
+import { connect } from "react-redux";
+import {mapDispatchToProps} from "../Redux/MapDispatchToProps/MapDispatchToProps"
+import {mapStateToProps} from "../Redux/MapStateToProps/MapStateToProps"
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-interface IProps {
-    dataList:Array<IPlaceModel>,
-    route : string
+
+interface IProps extends RouteComponentProps<any> {
+  onEditCinema(data:IPlaceModel,index:number):void,
+      dataList:Array<IPlaceModel>,
+     route : string
+  
+  }
+  
+
+// interface IProps {
+// //   cinema:IPlaceModel
+// // addCinema(data:IPlaceModel):void
+// //   onEditCinema(data:IPlaceModel):void,
+//     dataList:Array<IPlaceModel>,
+//     route : string
    
-}
+// }
 interface IState{}
 
-export class ListSearch extends Component<IProps,IState>{
+ class ListSearch1 extends Component<IProps,IState>{
     constructor(props:IProps) {
         super(props)
     }
 
-    openNewPage = ()=>{
-       // this.props.formPage()
+    addCinema = ()=>{
+      let newCinema:IPlaceModel = {
+        name:"",
+        description:"",
+        address:""
+
+      }
+      this.props.onEditCinema(newCinema,-1)
+this.props.history.replace(`${this.props.route}/newcinema` )
         
+    }
+    handleEdit = (cinema:IPlaceModel,index:number) => {
+this.props.onEditCinema(cinema,index)
+this.props.history.replace(`${this.props.route}/${cinema.name}` )
     }
  
 
 render() {
+ 
     return (
         <Table striped hover  className="align-right">
   <thead >
@@ -36,7 +64,12 @@ render() {
   
     <tr>
    
-      <td colSpan={4}>  <Link to={`${this.props.route}/newcinema`}> {ETranslator.ADD} </Link> </td>
+      <td colSpan={4}>
+        <Button onClick={this.addCinema}  variant="primary" size="lg" block> {ETranslator.ADD}</Button>
+          {/* <Link to={`${this.props.route}/newcinema`}> */}
+            
+              {/* </Link> */}
+               </td>
      
     </tr>
     
@@ -51,7 +84,10 @@ render() {
                     <td>
                      {item.address}
                     </td>
-                    <td>  <Link to={`${this.props.route}/:${item.name}`}> edit</Link></td>
+                    <td> 
+                <Button variant="outline-info" onClick={()=>this.handleEdit(item,index)}>{ETranslator.EDIT}</Button>
+                       {/* <Link to={`${this.props.route}/:${item.name}`}> edit</Link> */}
+                       </td>
                    
                 
                   </tr>
@@ -63,3 +99,9 @@ render() {
     )
 }
 }
+
+//  const mapStateToProps = (state:IPlaceModel) =>{
+//   return{cinemas:state}
+// }
+
+export const ListSearch = connect(mapStateToProps,mapDispatchToProps)(withRouter(ListSearch1))

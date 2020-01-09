@@ -7,5 +7,9 @@ export enum ETranslator {
     PARDIS_AND_AMPHITHEATRE = "پردیس و سالن ها",
     PROGRAMS = "برنامه ها",
     TAGS = "برچسب ها",
-    SCHADULES = "سانس ها"
+    SCHADULES = "سانس ها",
+    EDIT = "ویرایش",
+    SAVE = "ذخیره",
+    CANCEL = "انصراف",
+    DELETE = "حذف"
 }

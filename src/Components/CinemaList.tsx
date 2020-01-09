@@ -9,7 +9,7 @@ import {mapStateToProps} from "../Redux/MapStateToProps/MapStateToProps"
 
 
 interface IProps extends RouteComponentProps<any> {
-    cinema:IPlaceModel
+    cinemas:IPlaceModel
    /* Parent component's props*/
 }
 
@@ -27,7 +27,7 @@ interface IState {
     }
 
     render() {
-        let thisList = this.props.cinema.reducerAddCinema
+        let thisList = this.props.cinemas.reducerAddCinema
         return(
             <div>
                 <ListSearch dataList={thisList} route="cinemas"/>
@@ -35,7 +35,6 @@ interface IState {
         )
     }
 }
-
 
 
 export const CinemaList =  connect(mapStateToProps,mapDispatchToProps)(withRouter(CinemaList1))
