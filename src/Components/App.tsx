@@ -13,7 +13,6 @@ import { Provider,connect } from "react-redux";
 interface IProps{}
 
 function App(props:IProps) { 
-
  
   console.log(props)
   return (
@@ -24,7 +23,11 @@ function App(props:IProps) {
     
 <Switch>
   <Route name="login" path={routes.LOGIN} exact component={Login}/>
-  <Route name="main" component={Main}/>
+  <Route component={Main}/>
+  {/* <Route   render={matchProps => (
+        <NewCinema {...matchProps} />
+    )}/> */}
+ 
   </Switch>
   </BrowserRouter>
 </PersistGate>

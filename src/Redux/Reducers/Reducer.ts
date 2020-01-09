@@ -1,2 +1,3 @@
 import { combineReducers } from 'redux'
-export const reducer:any = combineReducers({})
+import {reducerAddCinema} from "./reducer.addCinema"
+export const reducer:any = combineReducers({reducerAddCinema})

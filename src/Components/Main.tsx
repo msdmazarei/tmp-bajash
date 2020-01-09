@@ -4,8 +4,20 @@ import {routes} from "../Constants/Routs"
 import {CinemaList} from "./CinemaList"
 import {Unavailable} from "./Unavailable"
 import {NewCinema} from "./NewCinema" 
+import {IPlaceModel } from "../Models/PlaceModel"
 
-export class Main extends Component{
+interface IProps {
+}
+interface IState{}
+
+
+
+
+export class Main extends Component<IProps,IState>{
+    constructor(props:IProps) {
+
+        super(props)
+    }
     render() {
         return(
             <div>
