@@ -13,19 +13,12 @@ import {IstateEditCinema} from "../Models/CinemaModel"
 interface IProps extends RouteComponentProps<any> {
   onEditCinema(data:IstateEditCinema):void,
       dataList:Array<IPlaceModel>,
-     route : string
+     route : string,
+     addItem(history:any):void,
+     editItem (cinema:IPlaceModel,index:number):void
   
   }
   
-
-// interface IProps {
-// //   cinema:IPlaceModel
-// // addCinema(data:IPlaceModel):void
-// //   onEditCinema(data:IPlaceModel):void,
-//     dataList:Array<IPlaceModel>,
-//     route : string
-   
-// }
 interface IState{}
 
  class ListSearch1 extends Component<IProps,IState>{
@@ -34,27 +27,12 @@ interface IState{}
     }
 
     addCinema = ()=>{
-      let newCinema:IstateEditCinema = {
-        name:"",
-        description:"",
-        address:"",
-        index:-1
-        
+      this.props.addItem(this.props.history)
 
-      }
-      this.props.onEditCinema(newCinema)
-this.props.history.replace(`${this.props.route}/newcinema` )
         
     }
     handleEdit = (cinema:IPlaceModel,index:number) => {
-    let newData = {
-      name:cinema.name,
-        description:cinema.description,
-        address:cinema.address,
-        index:index
-    }
-this.props.onEditCinema(newData)
-this.props.history.replace(`${this.props.route}/${cinema.name}` )
+      this.props.editItem(cinema,index)
     }
  
 
@@ -75,9 +53,7 @@ render() {
    
       <td colSpan={4}>
         <Button onClick={this.addCinema}  variant="primary" size="lg" block> {ETranslator.ADD}</Button>
-          {/* <Link to={`${this.props.route}/newcinema`}> */}
-            
-              {/* </Link> */}
+      
                </td>
      
     </tr>
@@ -109,8 +85,5 @@ render() {
 }
 }
 
-//  const mapStateToProps = (state:IPlaceModel) =>{
-//   return{cinemas:state}
-// }
 
 export const ListSearch = connect(mapStateToProps,mapDispatchToProps)(withRouter(ListSearch1))

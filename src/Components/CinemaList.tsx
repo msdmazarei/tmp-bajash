@@ -6,6 +6,7 @@ import {IPlaceModel} from "../Models/PlaceModel"
 import { connect } from "react-redux";
 import {mapDispatchToProps} from "../Redux/MapDispatchToProps/MapDispatchToProps"
 import {mapStateToProps} from "../Redux/MapStateToProps/MapStateToProps"
+import {IstateEditCinema} from "../Models/CinemaModel"
 
 
 interface IProps extends RouteComponentProps<any> {
@@ -26,11 +27,39 @@ interface IState {
 
     }
 
+    addCinema = (history:any)=>{
+        let newCinema:IstateEditCinema = {
+          name:"",
+          description:"",
+          address:"",
+          index:-1
+          
+  
+        }
+        this.props.onEditCinema(newCinema)
+  history.replace(`cinemas/newcinema` )
+          
+      }
+
+      handleEdit = (cinema:IPlaceModel,index:number) => {
+        let newData = {
+          name:cinema.name,
+            description:cinema.description,
+            address:cinema.address,
+            index:index
+        }
+    this.props.onEditCinema(newData)
+    this.props.history.replace(`cinemas/${cinema.name}` )
+        }
+
     render() {
         let thisList = this.props.cinemas.reducerAddCinema
         return(
             <div>
-                <ListSearch dataList={thisList} route="cinemas"/>
+                <ListSearch
+                addItem = {this.addCinema}
+                editItem = {this.handleEdit}
+                 dataList={thisList} route="cinemas"/>
             </div>
         )
     }
