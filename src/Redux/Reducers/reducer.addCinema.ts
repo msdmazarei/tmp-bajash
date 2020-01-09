@@ -1,18 +1,17 @@
 
 import {IPlaceModel} from "../../Models/PlaceModel"
 import {EActionTypes} from "../ActionTypes/ActionTypes"
+import {IstateEditCinema} from "../../Models/CinemaModel"
+import {IStoreModel} from "../../Models/StoreModel"
 
-interface Istate {
-    cinemas:Array<IPlaceModel>,
-     cinema:IPlaceModel
-}
 
-const defaultStateEdit:IPlaceModel = {
+const defaultStateEdit:IstateEditCinema = {
     
     
         name:"",
         description:"",
-        address:""
+        address:"",
+        index:0
     
     
 }
@@ -24,18 +23,22 @@ export const reducerAddCinema = (state:Array<IPlaceModel> = [] , action:any)=>{
         case EActionTypes.ADD_CINEMA:         
        
          return  [...state2,action.data]
-         //{...state, cinema:action.data}
-        // case EActionType.DELETE_ITEM:
-        //     return [
-        //         ...state.slice(0,action.index),
-        //         ...state.slice(action.index+1)
-        //     ]
+         case EActionTypes.EDIT_CINEMA_DETAIL :
+          return       [
+                    ...state2.slice(0,action.index),action.data,
+                   ...state2.slice(action.index+1)
+                 ]
+
         default:
             return state
     }
 }
 
-export const reducerEditCinema = (state:IPlaceModel = defaultStateEdit , action:any) =>{
+
+
+//export interface editModel extends Array<IPlaceModel>
+
+export const reducerEditCinema = (state:IstateEditCinema = defaultStateEdit , action:any) =>{
     switch(action.type){
          case EActionTypes.EDIT_CINEMA:
              return action.data

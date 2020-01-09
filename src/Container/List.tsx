@@ -7,10 +7,11 @@ import { connect } from "react-redux";
 import {mapDispatchToProps} from "../Redux/MapDispatchToProps/MapDispatchToProps"
 import {mapStateToProps} from "../Redux/MapStateToProps/MapStateToProps"
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import {IstateEditCinema} from "../Models/CinemaModel"
 
 
 interface IProps extends RouteComponentProps<any> {
-  onEditCinema(data:IPlaceModel,index:number):void,
+  onEditCinema(data:IstateEditCinema):void,
       dataList:Array<IPlaceModel>,
      route : string
   
@@ -33,18 +34,26 @@ interface IState{}
     }
 
     addCinema = ()=>{
-      let newCinema:IPlaceModel = {
+      let newCinema:IstateEditCinema = {
         name:"",
         description:"",
-        address:""
+        address:"",
+        index:-1
+        
 
       }
-      this.props.onEditCinema(newCinema,-1)
+      this.props.onEditCinema(newCinema)
 this.props.history.replace(`${this.props.route}/newcinema` )
         
     }
     handleEdit = (cinema:IPlaceModel,index:number) => {
-this.props.onEditCinema(cinema,index)
+    let newData = {
+      name:cinema.name,
+        description:cinema.description,
+        address:cinema.address,
+        index:index
+    }
+this.props.onEditCinema(newData)
 this.props.history.replace(`${this.props.route}/${cinema.name}` )
     }
  

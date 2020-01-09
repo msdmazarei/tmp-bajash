@@ -80,10 +80,17 @@ constructor(props:any) {
       this.props.history.replace(`/cinemas` )
     }
 
+    handleEdit = () =>{
+      const {name,description,address}= this.state
+      this.props.editCinema({name:name,description:description,address:address},
+        this.props.cinemas.reducerEditCinema.index)
+      this.props.history.replace(`/cinemas` )
+    }
+
     editButton = () =>{
       return (
         <ButtonToolbar>
-  <Button variant="outline-primary">{ETranslator.SAVE}</Button>
+  <Button variant="outline-primary" onClick={this.handleEdit}>{ETranslator.SAVE}</Button>
   <Button variant="outline-danger">{ETranslator.DELETE}</Button>
   <Button variant="outline-secondary" onClick={this.handleCancel}>{ETranslator.CANCEL}</Button>
 
@@ -93,8 +100,7 @@ constructor(props:any) {
 
 
     render() {
-     // localStorage.removeItem("*")
-     console.log(this.props.match.params.id)
+      console.log(this.props)
         return(
             <div>
                 <Form>
