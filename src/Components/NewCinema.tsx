@@ -64,7 +64,7 @@ constructor(props:any) {
 
     render() {
      // localStorage.removeItem("*")
-    //  console.log(this.props.cinema?this.props.cinema.name:"any",this.state.name)
+      
         return(
             <div>
                 <Form>

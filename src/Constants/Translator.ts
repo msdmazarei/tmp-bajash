@@ -3,5 +3,9 @@ export enum ETranslator {
     ADDRESS = "آدرس",
     DESCRIPTION = "توضیحات",
     ADD = "اضافه کردن",
-    ENTER_NAME ="نام سینما را وارد کنید"
+    ENTER_NAME ="نام سینما را وارد کنید",
+    PARDIS_AND_AMPHITHEATRE = "پردیس و سالن ها",
+    PROGRAMS = "برنامه ها",
+    TAGS = "برچسب ها",
+    SCHADULES = "سانس ها"
 }

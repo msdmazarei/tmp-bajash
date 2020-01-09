@@ -2,25 +2,14 @@ import React , {Component} from "react"
 import {ListSearch} from "../Container/List"
 import {PlaceComponent} from "./PlaceComponent"
 import { withRouter, RouteComponentProps } from "react-router-dom";
-const fakeData = [
-    {
-        name:"azadi",
-        description:"aa",
-        address:"enghelab"
-    },
-    {
-        name:"azadi1",
-        description:"aa1",
-        address:"enghelab1"
-    },
-    {
-        name:"azadi2",
-        description:"aa2",
-        address:"enghelab2"
-    }
-]
+import {IPlaceModel} from "../Models/PlaceModel"
+import { connect } from "react-redux";
+import {mapDispatchToProps} from "../Redux/MapDispatchToProps/MapDispatchToProps"
+import {mapStateToProps} from "../Redux/MapStateToProps/MapStateToProps"
+
 
 interface IProps extends RouteComponentProps<any> {
+    cinema:IPlaceModel
    /* Parent component's props*/
 }
 
@@ -28,18 +17,25 @@ interface IState {
 
 }
 
- class CinemaList extends Component<IProps,IState>{
-    constructor(props:IProps) {
+ class CinemaList1 extends Component<any,IState>{
+    constructor(props:any) {
         super(props)
     }
+
+    componentDidMount() {
+
+    }
+
     render() {
-      
+        let thisList = this.props.cinema.reducerAddCinema
         return(
             <div>
-                <ListSearch dataList={fakeData} route="cinemas"/>
+                <ListSearch dataList={thisList} route="cinemas"/>
             </div>
         )
     }
 }
 
-export {CinemaList}
+
+
+export const CinemaList =  connect(mapStateToProps,mapDispatchToProps)(withRouter(CinemaList1))

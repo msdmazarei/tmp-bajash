@@ -1,5 +1,5 @@
 import React ,{Component} from "react"
-import {Accordion,Card} from "react-bootstrap"
+import {Accordion,Card,Table} from "react-bootstrap"
 import {IPlaceModel} from "../Models/PlaceModel"
 import {ETranslator} from "../Constants/Translator"
 import {Link} from "react-router-dom"
@@ -24,33 +24,42 @@ export class ListSearch extends Component<IProps,IState>{
 
 render() {
     return (
-        <Accordion defaultActiveKey="0">
-             <Card>
-             <Link to={`${this.props.route}/newcinema`}>
-          <Accordion.Toggle eventKey="1">
-           {ETranslator.ADD}
-          </Accordion.Toggle>
-          </Link>
-          
-        </Card>
-            {this.props.dataList.length>0?
+        <Table striped hover  className="align-right">
+  <thead >
+    <tr>
+      <th></th>
+    <th>{ETranslator.NAME}</th>
+    <th colSpan={2}>{ETranslator.ADDRESS}</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+   
+      <td colSpan={4}>  <Link to={`${this.props.route}/newcinema`}> {ETranslator.ADD} </Link> </td>
+     
+    </tr>
+    
+             {this.props.dataList.length>0?
             this.props.dataList.map((item:IPlaceModel,index:number)=>{
                 return(
-                    <Card key={index}>
-                         <Link to={`${this.props.route}/:${item.name}`}>
-                    <Accordion.Toggle as={Card.Header} eventKey={ ` ${index}`}>
+                    <tr key={index}>
+            <td>{index+1}</td> 
+                    <td>
                      {item.name}
-                    </Accordion.Toggle>
-                    </Link>
-                    {/* <Accordion.Collapse eventKey= { ` ${index}`}>
-                      <Card.Body>hello</Card.Body>
-                    </Accordion.Collapse> */}
-                  </Card>
+                    </td>
+                    <td>
+                     {item.address}
+                    </td>
+                    <td>  <Link to={`${this.props.route}/:${item.name}`}> edit</Link></td>
+                   
+                
+                  </tr>
                 )
             }):""}
-       
-       
-      </Accordion>
+ 
+  </tbody>
+</Table>
     )
 }
 }
