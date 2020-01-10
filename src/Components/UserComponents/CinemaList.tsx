@@ -1,12 +1,12 @@
 import React , {Component} from "react"
-import {ListSearch} from "../Container/List"
-import {PlaceComponent} from "./PlaceComponent"
+import {ListSearch} from "../../Container/List"
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import {IPlaceModel} from "../Models/PlaceModel"
+import {IPlaceModel} from "../../Models/PlaceModel"
 import { connect } from "react-redux";
-import {mapDispatchToProps} from "../Redux/MapDispatchToProps/MapDispatchToProps"
-import {mapStateToProps} from "../Redux/MapStateToProps/MapStateToProps"
-import {IstateEditCinema} from "../Models/CinemaModel"
+import {mapDispatchToProps} from "../../Redux/MapDispatchToProps/MapDispatchToProps"
+import {mapStateToProps} from "../../Redux/MapStateToProps/MapStateToProps"
+import {IstateEditCinema} from "../../Models/CinemaModel"
+import {routes} from "../../Constants/Routs"
 
 
 interface IProps extends RouteComponentProps<any> {
@@ -37,7 +37,7 @@ interface IState {
   
         }
         this.props.onEditCinema(newCinema)
-  history.replace(`cinemas/newcinema` )
+  history.replace(routes.NEW_CINEMA )
           
       }
 
@@ -49,7 +49,7 @@ interface IState {
             index:index
         }
     this.props.onEditCinema(newData)
-    this.props.history.replace(`cinemas/${cinema.name}` )
+    this.props.history.replace(`cinemas/:${cinema.name}` )
         }
 
     render() {

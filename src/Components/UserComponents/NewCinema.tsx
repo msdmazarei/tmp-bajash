@@ -1,11 +1,12 @@
 import React , {Component} from "react"
 import {Form, Col,Button,ButtonToolbar} from "react-bootstrap"
-import {ETranslator} from "../Constants/Translator"
-import {IPlaceModel } from "../Models/PlaceModel"
+import {ETranslator} from "../../Constants/Translator"
+import {IPlaceModel } from "../../Models/PlaceModel"
 import { connect } from "react-redux";
-import {mapDispatchToProps} from "../Redux/MapDispatchToProps/MapDispatchToProps"
-import {mapStateToProps} from "../Redux/MapStateToProps/MapStateToProps"
+import {mapDispatchToProps} from "../../Redux/MapDispatchToProps/MapDispatchToProps"
+import {mapStateToProps} from "../../Redux/MapStateToProps/MapStateToProps"
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import {routes} from "../../Constants/Routs"
 
 
 interface IProps extends RouteComponentProps<any> {
@@ -55,7 +56,7 @@ constructor(props:any) {
     submitForm = ()=>{
         const {name,description,address}= this.state
       this.props.addCinema({name:name,description:description,address:address})
-      this.props.history.replace(`/cinemas` )
+      this.props.history.replace(routes.CINEMAS )
 
     // console.log("hello")
     }
@@ -78,21 +79,21 @@ constructor(props:any) {
     }
 
     handleCancel = ()=>{
-      this.props.history.replace(`/cinemas` )
+      this.props.history.replace(routes.CINEMAS )
     }
 
     handleEdit = () =>{
       const {name,description,address}= this.state
       this.props.editCinema({name:name,description:description,address:address},
         this.props.cinemas.reducerEditCinema.index)
-      this.props.history.replace(`/cinemas` )
+      this.props.history.replace(routes.CINEMAS )
     }
 
     handleDeletCinema = () => {
       const {name,description,address}= this.state
       this.props.deleteCinema({name:name,description:description,address:address},
         this.props.cinemas.reducerEditCinema.index)
-      this.props.history.replace(`/cinemas` )
+      this.props.history.replace(routes.CINEMAS )
     }
 
     controlEmpty = () => {
@@ -103,15 +104,40 @@ constructor(props:any) {
       return false
     }
 
+    amphitheatreForm = () =>{
+      this.props.history.replace(routes.NEW_AMPHITHEATRE )
+    }
+
     editButton = () =>{
       return (
+        <div>
+          <Button  className="margin-button left-float" variant="primary" onClick={this.amphitheatreForm}>{ETranslator.ADD_AMPHITHEATRE}</Button>
         <ButtonToolbar>
   <Button disabled={this.controlEmpty()} className="margin-button" variant="primary" onClick={this.handleEdit}>{ETranslator.SAVE}</Button>
   <Button  className="margin-button" variant="danger" onClick={this.handleDeletCinema}>{ETranslator.DELETE}</Button>
-  <Button  className="margin-button" variant="secondary" onClick={this.handleCancel}>{ETranslator.CANCEL}</Button>
-
+  <Button  className="margin-button"  variant="secondary" onClick={this.handleCancel}>{ETranslator.CANCEL}</Button>
+ 
 </ButtonToolbar>
+
+</div>
       )
+    }
+
+    addAmphitheatre = () => {
+      return (
+   <div></div>
+    //     <Form.Group>
+    //     <Form.Label>{ETranslator.DESCRIPTION}</Form.Label>
+    //   <Form.Control 
+    //   type="text" 
+    //   name="description"
+    //   value = {this.state.description}
+    //   onChange={this.handleInput} 
+    //   placeholder={ETranslator.DESCRIPTION}
+    //    />
+    // </Form.Group>
+      )
+
     }
 
 
@@ -157,6 +183,8 @@ constructor(props:any) {
   
   <Form.Row>   
   </Form.Row>
+  {this.props.match.params.id !=="newcinema"?this.addAmphitheatre():null}
+
   {this.props.match.params.id ==="newcinema"?this.newButton():this.editButton()}
 
 </Form>

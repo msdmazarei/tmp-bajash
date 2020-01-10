@@ -11,5 +11,6 @@ export enum ETranslator {
     EDIT = "ویرایش",
     SAVE = "ذخیره",
     CANCEL = "انصراف",
-    DELETE = "حذف"
+    DELETE = "حذف",
+    ADD_AMPHITHEATRE = "افزودن سالن"
 }
