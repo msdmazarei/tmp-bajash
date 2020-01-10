@@ -1,3 +1,5 @@
-export const mapStateToProps = (state:any) =>{
-    return{items:state}
+import {IPlaceModel} from "../../Models/PlaceModel"
+
+export const mapStateToProps = (state:IPlaceModel) =>{
+    return{cinemas:state}
 }

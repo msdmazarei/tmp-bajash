@@ -1,24 +1,23 @@
 import React , {Component} from "react"
-const fakeData = [
-    {
-        name:"azadi",
-        description:"aa",
-        address:"enghelab"
-    },
-    {
-        name:"azadi1",
-        description:"aa1",
-        address:"enghelab1"
-    },
-    {
-        name:"azadi2",
-        description:"aa2",
-        address:"enghelab2"
-    }
-]
 
-export class Login extends Component{
+
+import { withRouter, RouteComponentProps } from "react-router-dom";
+
+
+interface IProps extends RouteComponentProps<any> {
+   /* Parent component's props*/
+}
+
+interface IState {
+
+}
+
+ class Login extends Component<IProps,IState>{
+    constructor(props:IProps) {
+        super(props)
+    }
     render() {
+        this.props.history.replace(`/cinemas` )
         return(
             <div>
                login
@@ -26,3 +25,5 @@ export class Login extends Component{
         )
     }
 }
+
+export default withRouter(Login)
