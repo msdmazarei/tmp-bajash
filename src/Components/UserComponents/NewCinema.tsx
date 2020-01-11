@@ -1,5 +1,5 @@
 import React , {Component} from "react"
-import {Form, Col,Button,ButtonToolbar} from "react-bootstrap"
+import {Form, Col,Button,ButtonToolbar,DropdownButton,Dropdown} from "react-bootstrap"
 import {ETranslator} from "../../Constants/Translator"
 import {IPlaceModel } from "../../Models/PlaceModel"
 import { connect } from "react-redux";
@@ -7,12 +7,13 @@ import {mapDispatchToProps} from "../../Redux/MapDispatchToProps/MapDispatchToPr
 import {mapStateToProps} from "../../Redux/MapStateToProps/MapStateToProps"
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import {routes} from "../../Constants/Routs"
+import {IApheatreModel} from "../../Models/AmpheatreModel"
 
 
 interface IProps extends RouteComponentProps<any> {
  
 cinema:IPlaceModel
-addCinema(data:IPlaceModel):void
+//addCinema(data:IPlaceModel):void
 
 }
 
@@ -58,7 +59,7 @@ constructor(props:any) {
       this.props.addCinema({name:name,description:description,address:address})
       this.props.history.replace(routes.CINEMAS )
 
-    // console.log("hello")
+  
     }
 
     newButton = () =>{
@@ -105,6 +106,19 @@ constructor(props:any) {
     }
 
     amphitheatreForm = () =>{
+
+     
+        let newAmphitheatre:any = {
+          cinema : this.props.cinemas.reducerEditCinema.name,
+          name:"",
+          chair:0,
+          floor:0,
+          index:-1
+          
+  
+        }
+        this.props.onAmphitheatreForm(newAmphitheatre)
+
       this.props.history.replace(routes.NEW_AMPHITHEATRE )
     }
 
@@ -125,23 +139,19 @@ constructor(props:any) {
 
     addAmphitheatre = () => {
       return (
-   <div></div>
-    //     <Form.Group>
-    //     <Form.Label>{ETranslator.DESCRIPTION}</Form.Label>
-    //   <Form.Control 
-    //   type="text" 
-    //   name="description"
-    //   value = {this.state.description}
-    //   onChange={this.handleInput} 
-    //   placeholder={ETranslator.DESCRIPTION}
-    //    />
-    // </Form.Group>
+   
+   <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+     {this.props.cinemas.reducerAmphitheatre.map((item:IApheatreModel,index:number)=>{
+    return <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
+     })}
+</DropdownButton>
       )
 
     }
 
 
     render() {
+    console.log(this.props.cinemas.reducerAmphitheatre.length)
         return(
             <div>
                 <Form className="align-right">
@@ -182,11 +192,12 @@ constructor(props:any) {
     </Form.Group>
   
   <Form.Row>   
-  </Form.Row>
-  {this.props.match.params.id !=="newcinema"?this.addAmphitheatre():null}
-
+     {this.props.cinemas.reducerAmphitheatre.length>0?this.addAmphitheatre():null} 
+  </Form.Row> 
+  {/* {this.props.cinema.reducerAmphitheatre.length>0!=="newcinema"?this.addAmphitheatre():null} */}
+  <Form.Row>
   {this.props.match.params.id ==="newcinema"?this.newButton():this.editButton()}
-
+</Form.Row>
 </Form>
 
             </div>

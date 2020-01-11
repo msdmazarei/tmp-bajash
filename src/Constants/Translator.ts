@@ -12,5 +12,14 @@ export enum ETranslator {
     SAVE = "ذخیره",
     CANCEL = "انصراف",
     DELETE = "حذف",
-    ADD_AMPHITHEATRE = "افزودن سالن"
+    ADD_AMPHITHEATRE = "افزودن سالن",
+    AMPHITHEATRE_NAME = "نام سالن",
+    ENTER_AMPHITHEATRE_NAME = "نام سالن را وارد کنید",
+    NUMBER_OF_FLOOR = "تعداد طبقات",
+    ENTER_NUMBER_OF_FLOOR = "تعداد طبقات را وارد کنید",
+    NUMBER_OF_CHAIR = "تعداد صندلی",
+    ENTER_NUMBER_OF_CHAIR = "تعداد صندلی را وارد کنید",
+    UPLOAD_PLAN = "بارگذاری نقشه سالن",
+    CINEMA_NAME = "نام سینما"
+
 }
