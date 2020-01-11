@@ -1,26 +1,22 @@
-import React , {Component} from "react"
-
-
-import { withRouter, RouteComponentProps } from "react-router-dom";
-
+import React, {Component} from "react"
+import {withRouter, RouteComponentProps} from "react-router-dom";
 
 interface IProps extends RouteComponentProps<any> {
-   /* Parent component's props*/
+    /* Parent component's props*/
 }
 
-interface IState {
+interface IState {}
 
-}
-
- class Login extends Component<IProps,IState>{
-    constructor(props:IProps) {
+class Login extends Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props)
     }
+
     render() {
-        this.props.history.replace(`/cinemas` )
-        return(
+        // this.props.history.replace(`/cinemas`)
+        return (
             <div>
-               login
+                login
             </div>
         )
     }

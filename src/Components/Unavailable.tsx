@@ -1,8 +1,8 @@
-import React , {Component} from "react"
+import React, {Component} from "react"
 
-export class Unavailable extends Component{
+export class Unavailable extends Component {
     render() {
-        return(
+        return (
             <div>Unavailable</div>
         )
     }
