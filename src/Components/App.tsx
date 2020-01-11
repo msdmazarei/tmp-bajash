@@ -15,7 +15,6 @@ function App() {
         <Provider store={Store}>
             <PersistGate loading={null} persistor={persistor}>
                 <BrowserRouter>
-                    <Header/>
                     <Switch>
                         <Route name="login" path={routes.HOME} exact component={Login}/>
                         <Route name="login" path={routes.LOGIN} exact component={Login}/>
