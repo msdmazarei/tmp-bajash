@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React , {Component} from "react"
-import {Form, Col,Button,ButtonToolbar,DropdownButton,Dropdown} from "react-bootstrap"
-=======
 import React, {Component} from "react"
 import {Form, Col, Button, ButtonToolbar} from "react-bootstrap"
->>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
 import {ETranslator} from "../../Constants/Translator"
 import {IPlaceModel} from "../../Models/PlaceModel"
 import {connect} from "react-redux";
@@ -15,12 +10,6 @@ import {routes} from "../../Constants/Routs"
 import {IApheatreModel} from "../../Models/AmpheatreModel"
 
 interface IProps extends RouteComponentProps<any> {
-<<<<<<< HEAD
- 
-cinema:IPlaceModel
-//addCinema(data:IPlaceModel):void
-=======
->>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
 
     cinema: IPlaceModel
 
@@ -65,11 +54,7 @@ class NewCinema1 extends Component<any, IState> {
         this.props.addCinema({name: name, description: description, address: address})
         this.props.history.replace(routes.CINEMAS)
 
-<<<<<<< HEAD
-  
-=======
         // console.log("hello")
->>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
     }
 
     newButton = () => {
@@ -113,26 +98,8 @@ class NewCinema1 extends Component<any, IState> {
         return false
     }
 
-<<<<<<< HEAD
-    amphitheatreForm = () =>{
-
-     
-        let newAmphitheatre:any = {
-          cinema : this.props.cinemas.reducerEditCinema.name,
-          name:"",
-          chair:0,
-          floor:0,
-          index:-1
-          
-  
-        }
-        this.props.onAmphitheatreForm(newAmphitheatre)
-
-      this.props.history.replace(routes.NEW_AMPHITHEATRE )
-=======
     amphitheatreForm = () => {
         this.props.history.replace(routes.NEW_AMPHITHEATRE)
->>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
     }
 
     editButton = () => {
@@ -154,16 +121,6 @@ class NewCinema1 extends Component<any, IState> {
     }
 
     addAmphitheatre = () => {
-<<<<<<< HEAD
-      return (
-   
-   <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-     {this.props.cinemas.reducerAmphitheatre.map((item:IApheatreModel,index:number)=>{
-    return <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
-     })}
-</DropdownButton>
-      )
-=======
         return (
             <div></div>
             //     <Form.Group>
@@ -177,62 +134,10 @@ class NewCinema1 extends Component<any, IState> {
             //    />
             // </Form.Group>
         )
->>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
 
     }
 
     render() {
-<<<<<<< HEAD
-    console.log(this.props.cinemas.reducerAmphitheatre.length)
-        return(
-            <div>
-                <Form className="align-right">
-  <Form.Row>
-    <Form.Group as={Col}>
-      <Form.Label>{ETranslator.NAME}</Form.Label>
-      <Form.Control
-       type="text" 
-       placeholder={ETranslator.ENTER_NAME} 
-       name="name" 
-       value={this.state.name}
-       onChange={this.handleInput} 
-      />
-    </Form.Group>
-    <Form.Group  as={Col}>
-        <Form.Label>{ETranslator.ADDRESS}</Form.Label>
-    <Form.Control 
-    type="text" 
-    name="address"
-    value = {this.state.address}
-    onChange={this.handleInput} 
-    placeholder="..." />
-  </Form.Group>
-
-
-  </Form.Row>
-
-
-  <Form.Group>
-        <Form.Label>{ETranslator.DESCRIPTION}</Form.Label>
-      <Form.Control 
-      type="text" 
-      name="description"
-      value = {this.state.description}
-      onChange={this.handleInput} 
-      placeholder={ETranslator.DESCRIPTION}
-       />
-    </Form.Group>
-  
-  <Form.Row>   
-     {this.props.cinemas.reducerAmphitheatre.length>0?this.addAmphitheatre():null} 
-  </Form.Row> 
-  {/* {this.props.cinema.reducerAmphitheatre.length>0!=="newcinema"?this.addAmphitheatre():null} */}
-  <Form.Row>
-  {this.props.match.params.id ==="newcinema"?this.newButton():this.editButton()}
-</Form.Row>
-</Form>
-
-=======
         return (
             <div>
                 <Form className="align-right">
@@ -270,7 +175,6 @@ class NewCinema1 extends Component<any, IState> {
                     {this.props.match.params.id !== "newcinema" ? this.addAmphitheatre() : null}
                     {this.props.match.params.id === "newcinema" ? this.newButton() : this.editButton()}
                 </Form>
->>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
             </div>
         )
     }
