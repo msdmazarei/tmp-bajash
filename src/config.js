@@ -8,7 +8,6 @@ export const baseData = {
       ? process.env.REACT_APP_URL_COMPANYNAME_PERSIAN
       : 'باجاش',
     copyright_logo: '',
-    API_BASE: '',
-
+    API_BASE: ''
   }
   

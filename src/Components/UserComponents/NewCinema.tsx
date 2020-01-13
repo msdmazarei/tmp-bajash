@@ -1,110 +1,119 @@
+<<<<<<< HEAD
 import React , {Component} from "react"
 import {Form, Col,Button,ButtonToolbar,DropdownButton,Dropdown} from "react-bootstrap"
+=======
+import React, {Component} from "react"
+import {Form, Col, Button, ButtonToolbar} from "react-bootstrap"
+>>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
 import {ETranslator} from "../../Constants/Translator"
-import {IPlaceModel } from "../../Models/PlaceModel"
-import { connect } from "react-redux";
+import {IPlaceModel} from "../../Models/PlaceModel"
+import {connect} from "react-redux";
 import {mapDispatchToProps} from "../../Redux/MapDispatchToProps/MapDispatchToProps"
 import {mapStateToProps} from "../../Redux/MapStateToProps/MapStateToProps"
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import {withRouter, RouteComponentProps} from "react-router-dom";
 import {routes} from "../../Constants/Routs"
 import {IApheatreModel} from "../../Models/AmpheatreModel"
 
-
 interface IProps extends RouteComponentProps<any> {
+<<<<<<< HEAD
  
 cinema:IPlaceModel
 //addCinema(data:IPlaceModel):void
+=======
+>>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
+
+    cinema: IPlaceModel
+
+    addCinema(data: IPlaceModel): void
 
 }
 
-
-interface IState{
-name:string,
-description:string,
-address:string
+interface IState {
+    name: string,
+    description: string,
+    address: string
 }
 
-class NewCinema1 extends Component<any,IState>{
+class NewCinema1 extends Component<any, IState> {
 
-constructor(props:any) {
-    super(props)
-    this.state = {
-         name : this.props.cinemas.reducerEditCinema.name,
-        description: this.props.cinemas.reducerEditCinema.description,
-        address:this.props.cinemas.reducerEditCinema.address 
-        
+    constructor(props: any) {
+        super(props)
+        this.state = {
+            name: this.props.cinemas.reducerEditCinema.name,
+            description: this.props.cinemas.reducerEditCinema.description,
+            address: this.props.cinemas.reducerEditCinema.address
+
+        }
     }
-}
 
-
-
-
-
-    handleInput = (e: React.ChangeEvent<HTMLSelectElement>)=>{
-      let item:string = e.target.name
-      let newValue:string=e.target.value
-      switch(item) {
-        case "name":
-          return this.setState({name:newValue})
-          case "description":
-            return  this.setState({description:newValue})
+    handleInput = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        let item: string = e.target.name
+        let newValue: string = e.target.value
+        switch (item) {
+            case "name":
+                return this.setState({name: newValue})
+            case "description":
+                return this.setState({description: newValue})
             case "address":
-              return this.setState({address:newValue})
-              default: return
-      }
-      
+                return this.setState({address: newValue})
+            default:
+                return
+        }
     }
-    submitForm = ()=>{
-        const {name,description,address}= this.state
-      this.props.addCinema({name:name,description:description,address:address})
-      this.props.history.replace(routes.CINEMAS )
+    submitForm = () => {
+        const {name, description, address} = this.state
+        this.props.addCinema({name: name, description: description, address: address})
+        this.props.history.replace(routes.CINEMAS)
 
+<<<<<<< HEAD
   
+=======
+        // console.log("hello")
+>>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
     }
 
-    newButton = () =>{
-      return (
-        <ButtonToolbar>
-<Button 
- disabled={this.controlEmpty()}
-        onClick={this.submitForm}
-       variant="primary"   
-      >
-         {ETranslator.SAVE}
-       </Button>
-      <Button onClick={this.handleCancel} variant="secondary">{ETranslator.CANCEL}</Button>
-      
-      </ButtonToolbar>
-        
-      )
+    newButton = () => {
+        return (
+            <ButtonToolbar>
+                <Button
+                    disabled={this.controlEmpty()}
+                    onClick={this.submitForm}
+                    variant="primary"
+                >
+                    {ETranslator.SAVE}
+                </Button>
+                <Button onClick={this.handleCancel} variant="secondary">{ETranslator.CANCEL}</Button>
+            </ButtonToolbar>
+        )
     }
 
-    handleCancel = ()=>{
-      this.props.history.replace(routes.CINEMAS )
+    handleCancel = () => {
+        this.props.history.replace(routes.CINEMAS)
     }
 
-    handleEdit = () =>{
-      const {name,description,address}= this.state
-      this.props.editCinema({name:name,description:description,address:address},
-        this.props.cinemas.reducerEditCinema.index)
-      this.props.history.replace(routes.CINEMAS )
+    handleEdit = () => {
+        const {name, description, address} = this.state
+        this.props.editCinema({name: name, description: description, address: address},
+            this.props.cinemas.reducerEditCinema.index)
+        this.props.history.replace(routes.CINEMAS)
     }
 
     handleDeletCinema = () => {
-      const {name,description,address}= this.state
-      this.props.deleteCinema({name:name,description:description,address:address},
-        this.props.cinemas.reducerEditCinema.index)
-      this.props.history.replace(routes.CINEMAS )
+        const {name, description, address} = this.state
+        this.props.deleteCinema({name: name, description: description, address: address},
+            this.props.cinemas.reducerEditCinema.index)
+        this.props.history.replace(routes.CINEMAS)
     }
 
     controlEmpty = () => {
-      const {name,address,description} = this.state
-      if (name ===""|| address ==="" || description ==="") {
-        return true
-      }
-      return false
+        const {name, address, description} = this.state
+        if (name === "" || address === "" || description === "") {
+            return true
+        }
+        return false
     }
 
+<<<<<<< HEAD
     amphitheatreForm = () =>{
 
      
@@ -120,24 +129,32 @@ constructor(props:any) {
         this.props.onAmphitheatreForm(newAmphitheatre)
 
       this.props.history.replace(routes.NEW_AMPHITHEATRE )
+=======
+    amphitheatreForm = () => {
+        this.props.history.replace(routes.NEW_AMPHITHEATRE)
+>>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
     }
 
-    editButton = () =>{
-      return (
-        <div>
-          <Button  className="margin-button left-float" variant="primary" onClick={this.amphitheatreForm}>{ETranslator.ADD_AMPHITHEATRE}</Button>
-        <ButtonToolbar>
-  <Button disabled={this.controlEmpty()} className="margin-button" variant="primary" onClick={this.handleEdit}>{ETranslator.SAVE}</Button>
-  <Button  className="margin-button" variant="danger" onClick={this.handleDeletCinema}>{ETranslator.DELETE}</Button>
-  <Button  className="margin-button"  variant="secondary" onClick={this.handleCancel}>{ETranslator.CANCEL}</Button>
- 
-</ButtonToolbar>
+    editButton = () => {
+        return (
+            <div>
+                <Button className="margin-button left-float" variant="primary"
+                        onClick={this.amphitheatreForm}>{ETranslator.ADD_AMPHITHEATRE}</Button>
+                <ButtonToolbar>
+                    <Button disabled={this.controlEmpty()} className="margin-button" variant="primary"
+                            onClick={this.handleEdit}>{ETranslator.SAVE}</Button>
+                    <Button className="margin-button" variant="danger"
+                            onClick={this.handleDeletCinema}>{ETranslator.DELETE}</Button>
+                    <Button className="margin-button" variant="secondary"
+                            onClick={this.handleCancel}>{ETranslator.CANCEL}</Button>
+                </ButtonToolbar>
 
-</div>
-      )
+            </div>
+        )
     }
 
     addAmphitheatre = () => {
+<<<<<<< HEAD
       return (
    
    <DropdownButton id="dropdown-basic-button" title="Dropdown button">
@@ -146,11 +163,26 @@ constructor(props:any) {
      })}
 </DropdownButton>
       )
+=======
+        return (
+            <div></div>
+            //     <Form.Group>
+            //     <Form.Label>{ETranslator.DESCRIPTION}</Form.Label>
+            //   <Form.Control
+            //   type="text"
+            //   name="description"
+            //   value = {this.state.description}
+            //   onChange={this.handleInput}
+            //   placeholder={ETranslator.DESCRIPTION}
+            //    />
+            // </Form.Group>
+        )
+>>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
 
     }
 
-
     render() {
+<<<<<<< HEAD
     console.log(this.props.cinemas.reducerAmphitheatre.length)
         return(
             <div>
@@ -200,9 +232,48 @@ constructor(props:any) {
 </Form.Row>
 </Form>
 
+=======
+        return (
+            <div>
+                <Form className="align-right">
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>{ETranslator.NAME}</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder={ETranslator.ENTER_NAME}
+                                name="name"
+                                value={this.state.name}
+                                onChange={this.handleInput}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>{ETranslator.ADDRESS}</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="address"
+                                value={this.state.address}
+                                onChange={this.handleInput}
+                                placeholder="..."/>
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Group>
+                        <Form.Label>{ETranslator.DESCRIPTION}</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.handleInput}
+                            placeholder={ETranslator.DESCRIPTION}
+                        />
+                    </Form.Group>
+                    {this.props.match.params.id !== "newcinema" ? this.addAmphitheatre() : null}
+                    {this.props.match.params.id === "newcinema" ? this.newButton() : this.editButton()}
+                </Form>
+>>>>>>> a9bab8bab78bbf83ef3bcc233173dbb3260ac114
             </div>
         )
     }
 }
 
-export const NewCinema =  connect(mapStateToProps,mapDispatchToProps)(withRouter(NewCinema1))
+export const NewCinema = connect(mapStateToProps, mapDispatchToProps)(withRouter(NewCinema1))
