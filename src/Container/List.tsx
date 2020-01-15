@@ -1,8 +1,7 @@
 import React ,{Component} from "react"
-import {Accordion,Card,Table, Button} from "react-bootstrap"
+import {Table, Button} from "react-bootstrap"
 import {IPlaceModel} from "../Models/PlaceModel"
 import {ETranslator} from "../Constants/Translator"
-import {Link} from "react-router-dom"
 import { connect } from "react-redux";
 import {mapDispatchToProps} from "../Redux/MapDispatchToProps/MapDispatchToProps"
 import {mapStateToProps} from "../Redux/MapStateToProps/MapStateToProps"
@@ -22,9 +21,6 @@ interface IProps extends RouteComponentProps<any> {
 interface IState{}
 
  class ListSearch1 extends Component<IProps,IState>{
-    constructor(props:IProps) {
-        super(props)
-    }
 
     addCinema = ()=>{
       this.props.addItem(this.props.history)

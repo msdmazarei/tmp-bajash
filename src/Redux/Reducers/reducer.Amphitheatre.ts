@@ -1,8 +1,6 @@
 
-import {IPlaceModel} from "../../Models/PlaceModel"
 import {EActionTypes} from "../ActionTypes/ActionTypes"
 import {IApheatreModel} from "../../Models/AmpheatreModel"
-import {IStoreModel} from "../../Models/StoreModel"
 
 
 // const defaultStateEdit:IstateEditCinema = {

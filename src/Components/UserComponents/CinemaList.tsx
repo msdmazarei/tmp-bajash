@@ -16,10 +16,7 @@ interface IProps extends RouteComponentProps<any> {
 interface IState {}
 
 class CinemaList1 extends Component<any, IState> {
-    constructor(props: any) {
-        super(props)
-    }
-
+ 
     componentDidMount() {
     }
 

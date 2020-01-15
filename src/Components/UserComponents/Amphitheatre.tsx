@@ -7,6 +7,7 @@ import { mapDispatchToProps } from "../../Redux/MapDispatchToProps/MapDispatchTo
 import { mapStateToProps } from "../../Redux/MapStateToProps/MapStateToProps"
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { routes } from "../../Constants/Routs"
+import {ISalonModel} from "../../Models/svgPlanModel"
 
 interface IProps extends RouteComponentProps<any> {
 	cinema: IPlaceModel
@@ -21,40 +22,8 @@ interface IState {
 	cinema: string
 }
 
-const hhh = {
-	name: "s1",
-	plan: [
-		{
-			name: "p1",
-			chairs: [
-				{
-					name: "c1",
-					tag: "vip"
-				}
-			]
-		}
-	]
-}
 
-// interface ISaloonData{
-// 	id: string
-// 	name:string
-// 	plans: Array<{
-// 		id:string
-// 		name:string
-// 		chairs:Array<{
-// 			id:string
-// 			name:string
-// 			tag:String
-// 		}>
-// 	}>	
-// }
 
-// const fdb:ISaloonData['plans'] = [{
-// 	name:'',
-// 	chairs:[],
-// 	id:''
-// }];
 
 class Amphitheatre1 extends Component<any, IState> {
 	constructor(props: any) {
@@ -160,36 +129,88 @@ class Amphitheatre1 extends Component<any, IState> {
 	}
 
 	translateSVG(s:string) {
-		// var elm = document.createElement(s)
 
 		const parser = new DOMParser()
 		const doc = parser.parseFromString(s, "application/xml");
-		// const svgToShow = new XMLSerializer().serializeToString(doc);
-		var nodeList = doc.querySelectorAll('[id^=s]')
+		let nodeList = doc.querySelectorAll('[id^=s]')
 		this.createSaloonData(nodeList)	
 	}
 
 
-	createSaloonData(e:object) {
-		const saloonData = {}
+	createSaloonData(e:any) {
+		
+		let saloonData :ISalonModel = {id:"",
+	name: "",
+	plan :[]
+}
+		// = {
+		// 		id: "",
+		// 		name: "",
+		// 		plan : [{id: "", name:"", chairs:[{id:"", tag:"" }]}]
+		//	}
+	
+
+		let saloonList: Array<string>=[]
+		let zoneList :Array<Array<string>> =[]
+		let chairList : Array<Array<string>> =[]
+	
+
 		for(const property of e) {
 			if (!property.id) {return} 
 			let tmpData = property.id.split('_')
+		
+
 			switch (tmpData.length) {
 				case 1:
-					saloonData.saloon = tmpData[0]
+					saloonList.push(tmpData[0]) 
 					break;
-				case 2:
-					
-					break;
-				case 3:
-					
-					break;
+				 case 2:
+					zoneList.push(tmpData)
+				 	break;
+				 case 3:					
+					chairList.push(tmpData)
+				 	break;
 			
 				default:
 					break;
 			}
+
 		}
+
+		debugger
+		saloonData.id = saloonList[0]
+	
+		if (zoneList.length>0){
+			for (const item of zoneList){
+				const newChairList = this.addChair(item[1],chairList)
+				saloonData.plan.push({id:item[1], name:""
+					,chairs:newChairList
+				})
+				
+				}
+		}
+
+		
+console.log(saloonData)
+	}
+
+	addChair(id:string, list:Array<Array<string>>) {
+	
+		if (list.length>0) {
+			let newChairs= [] 
+			for (let property of list) {
+				
+				if (property[1]===id){
+					newChairs.push({id:property[2], tag:""})
+				}
+			} 
+			return newChairs
+
+		}
+		
+
+		
+
 	}
 	
 	myinp: any | null = null;
@@ -253,7 +274,7 @@ class Amphitheatre1 extends Component<any, IState> {
 									className="prewiev-plan"
 									ref={(e) => this.previewContainer = e}
 								>
-									<img src="" />
+									
 								</div>
 								{/* <Form.Label>{ETranslator.UPLOAD_PLAN}</Form.Label>
 								<Form.Control

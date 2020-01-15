@@ -8,9 +8,6 @@ interface IProps extends RouteComponentProps<any> {
 interface IState {}
 
 class Login extends Component<IProps, IState> {
-    constructor(props: IProps) {
-        super(props)
-    }
 
     render() {
         // this.props.history.replace(`/cinemas`)

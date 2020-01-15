@@ -13,11 +13,6 @@ interface IProps {}
 interface IState {}
 
 export class Main extends Component<IProps, IState> {
-    constructor(props: IProps) {
-
-        super(props)
-    }
-
     render() {
         return (
             <div>
