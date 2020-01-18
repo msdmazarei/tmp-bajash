@@ -8,6 +8,7 @@ import { mapStateToProps } from "../../Redux/MapStateToProps/MapStateToProps"
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { routes } from "../../Constants/Routs"
 import {ISalonModel} from "../../Models/svgPlanModel"
+import {Store} from "../../Redux/Store/Store"
 
 interface IProps extends RouteComponentProps<any> {
 	cinema: IPlaceModel
@@ -19,7 +20,9 @@ interface IState {
 	name: string,
 	chair: number,
 	floor: number,
-	cinema: string
+	cinema: string,
+	svgTranslate: ISalonModel
+	
 }
 
 
@@ -32,7 +35,11 @@ class Amphitheatre1 extends Component<any, IState> {
 			name: this.props.cinemas.reducerAmphitheatreForm.name,
 			chair: this.props.cinemas.reducerAmphitheatreForm.chair,
 			floor: this.props.cinemas.reducerAmphitheatreForm.floor,
-			cinema: this.props.cinemas.reducerAmphitheatreForm.cinema
+			cinema: this.props.cinemas.reducerAmphitheatreForm.cinema,
+			svgTranslate:  {id:"",
+			name: "",
+			plan :[]
+		}
 		}
 	}
 
@@ -52,16 +59,16 @@ class Amphitheatre1 extends Component<any, IState> {
 	}
 
 	submitForm = () => {
-		const { name, floor, chair } = this.state
-		this.props.addAmphitheatre({ name: name, floor: floor, chair: chair })
+		const { name, floor, chair ,svgTranslate} = this.state
+		this.props.addAmphitheatre({ name: name, floor: floor, chair: chair, svgTranslate:svgTranslate  })
 		this.props.history.replace(`/cinemas`)
 
 		// console.log("hello")
 	}
 
 	controlEmpty = () => {
-		const { name, chair, floor } = this.state
-		if (name === "" || chair === 0 || floor === 0) {
+		const { name, chair, floor ,svgTranslate} = this.state
+		if (name === "" || chair === 0 || floor === 0 ||svgTranslate.id==="") {
 			return true
 		}
 		return false
@@ -176,9 +183,8 @@ class Amphitheatre1 extends Component<any, IState> {
 			}
 
 		}
-
-		debugger
 		saloonData.id = saloonList[0]
+		saloonData.name = this.state.name
 	
 		if (zoneList.length>0){
 			for (const item of zoneList){
@@ -190,8 +196,7 @@ class Amphitheatre1 extends Component<any, IState> {
 				}
 		}
 
-		
-console.log(saloonData)
+		this.setState({svgTranslate:saloonData})
 	}
 
 	addChair(id:string, list:Array<Array<string>>) {
@@ -218,6 +223,7 @@ console.log(saloonData)
     previewContainer: HTMLElement | null = null;
 
 	render() {
+		console.log(Store.getState())
 		return (
 			<div>
 				<h3>{ETranslator.CINEMA_NAME}: {this.props.cinemas.reducerAmphitheatreForm.cinema}</h3>

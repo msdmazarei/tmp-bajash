@@ -6,7 +6,12 @@ const defaultStateEdit:IAnAmphitheatreModel = {
     cinema:"",
     floor:0,
     chair:0,
-    index: 0
+    index: 0,
+    svgTranslate:  {id:"",
+			name: "",
+			plan :[]
+		}
+    
 }
 
 export const reducerAmphitheatreForm = (state:IAnAmphitheatreModel = defaultStateEdit , action:any) =>{

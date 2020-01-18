@@ -114,6 +114,23 @@ class NewCinema1 extends Component<any, IState> {
       this.props.history.replace(routes.NEW_AMPHITHEATRE )
     }
 
+    editAmphitheatre = () =>{
+
+     
+        let newAmphitheatre:any = {
+          cinema : this.props.cinemas.reducerEditCinema.name,
+          name:"",
+          chair:0,
+          floor:0,
+          index:-1
+          
+  
+        }
+        this.props.onAmphitheatreForm(newAmphitheatre)
+
+      this.props.history.replace(routes.NEW_AMPHITHEATRE )
+    }
+
     editButton = () => {
         return (
             <div>
