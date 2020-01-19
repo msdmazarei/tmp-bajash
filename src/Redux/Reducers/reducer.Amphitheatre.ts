@@ -1,6 +1,6 @@
 
 import {EActionTypes} from "../ActionTypes/ActionTypes"
-import {IApheatreModel} from "../../Models/AmpheatreModel"
+import {IApheatreModel, IAmphitheatreActionModel} from "../../Models/AmpheatreModel"
 
 
 // const defaultStateEdit:IstateEditCinema = {
@@ -14,7 +14,7 @@ import {IApheatreModel} from "../../Models/AmpheatreModel"
     
 // }
 
-export const reducerAmphitheatre = (state:Array<IApheatreModel> = [] , action:any)=>{
+export const reducerAmphitheatre = (state:Array<IApheatreModel> = [] , action:IAmphitheatreActionModel)=>{
     let state2 = state
 
     switch(action.type){

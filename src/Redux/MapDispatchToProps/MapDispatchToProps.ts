@@ -8,8 +8,9 @@ import {deleteCinema} from "../Actions/DeleteCinema"
 import {IApheatreModel,IAnAmphitheatreModel} from "../../Models/AmpheatreModel"
 import {onAmphitheatreForm} from "../Actions/AmphitheatreForm"
 import {addAmphitheatre} from "../Actions/AddAmphitheatre"
+import { Dispatch } from "redux";
 
-export const mapDispatchToProps= (dispatch:any)=>{
+export const mapDispatchToProps= (dispatch:Dispatch)=>{
     return{
         addCinema:(data:IPlaceModel)=>{
             

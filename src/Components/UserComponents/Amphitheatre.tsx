@@ -3,17 +3,21 @@ import { Form, Col, Button, ButtonToolbar } from "react-bootstrap"
 import { ETranslator } from "../../Constants/Translator"
 import { IPlaceModel } from "../../Models/PlaceModel"
 import { connect } from "react-redux";
-import { mapDispatchToProps } from "../../Redux/MapDispatchToProps/MapDispatchToProps"
-import { mapStateToProps } from "../../Redux/MapStateToProps/MapStateToProps"
+// import { mapDispatchToProps } from "../../Redux/MapDispatchToProps/MapDispatchToProps"
+// import { mapStateToProps } from "../../Redux/MapStateToProps/MapStateToProps"
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { routes } from "../../Constants/Routs"
 import {ISalonModel} from "../../Models/svgPlanModel"
-import {Store} from "../../Redux/Store/Store"
+import {IStoreRedux} from "../../Redux/Store/StoreModel"
+import {IApheatreModel} from "../../Models/AmpheatreModel"
+import {addAmphitheatre} from "../../Redux/Actions/AddAmphitheatre"
+import {IAnAmphitheatreModel} from "../../Models/AmpheatreModel"
+import {Dispatch} from "redux"
 
 interface IProps extends RouteComponentProps<any> {
-	cinema: IPlaceModel
+	addAmphitheatre(data:IApheatreModel): void
+	amphitheatre:IAnAmphitheatreModel
 
-	addCinema(data: IPlaceModel): void
 }
 
 interface IState {
@@ -28,14 +32,14 @@ interface IState {
 
 
 
-class Amphitheatre1 extends Component<any, IState> {
-	constructor(props: any) {
+class Amphitheatre1 extends Component<IProps, IState> {
+	constructor(props: IProps) {
 		super(props)
 		this.state = {
-			name: this.props.cinemas.reducerAmphitheatreForm.name,
-			chair: this.props.cinemas.reducerAmphitheatreForm.chair,
-			floor: this.props.cinemas.reducerAmphitheatreForm.floor,
-			cinema: this.props.cinemas.reducerAmphitheatreForm.cinema,
+			name: this.props.amphitheatre.name,
+			chair: this.props.amphitheatre.chair,
+			floor: this.props.amphitheatre.floor,
+			cinema: this.props.amphitheatre.cinema,
 			svgTranslate:  {id:"",
 			name: "",
 			plan :[]
@@ -60,7 +64,8 @@ class Amphitheatre1 extends Component<any, IState> {
 
 	submitForm = () => {
 		const { name, floor, chair ,svgTranslate} = this.state
-		this.props.addAmphitheatre({ name: name, floor: floor, chair: chair, svgTranslate:svgTranslate  })
+		const newAmphi: IApheatreModel= { name: name, floor: floor, chair: chair, svgTranslate:svgTranslate ,cinema:this.props.amphitheatre.cinema }
+		this.props.addAmphitheatre(newAmphi)
 		this.props.history.replace(`/cinemas`)
 
 		// console.log("hello")
@@ -223,10 +228,10 @@ class Amphitheatre1 extends Component<any, IState> {
     previewContainer: HTMLElement | null = null;
 
 	render() {
-		console.log(Store.getState())
+		
 		return (
 			<div>
-				<h3>{ETranslator.CINEMA_NAME}: {this.props.cinemas.reducerAmphitheatreForm.cinema}</h3>
+				<h3>{ETranslator.CINEMA_NAME}: {this.props.amphitheatre.cinema}</h3>
 				<div className="form-box">
 					<Form className="align-right">
 						<Form.Row>
@@ -293,12 +298,27 @@ class Amphitheatre1 extends Component<any, IState> {
 							</Form.Group>
 						</Form.Row>
 						{/* {this.props.match.params.id !=="newcinema"?this.addAmphitheatre():null} */}
-						{this.props.cinemas.reducerAmphitheatreForm.name === "" ? this.newButton() : this.editButton()}
+						{this.props.amphitheatre.name === "" ? this.newButton() : this.editButton()}
 					</Form>
 				</div>
 			</div>
 		)
 	}
+}
+
+const mapDispatchToProps= (dispatch:Dispatch)=>{
+    return{
+     
+        addAmphitheatre :(data:IApheatreModel)=>{
+            
+            dispatch(addAmphitheatre(data))
+        
+        
+        },
+       
+}}
+ const mapStateToProps = (state:IStoreRedux) =>{
+    return{amphitheatre:state.amphitheatre}
 }
 
 export const Amphitheatre = connect(mapStateToProps, mapDispatchToProps)(withRouter(Amphitheatre1));

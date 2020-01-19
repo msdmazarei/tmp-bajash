@@ -1,5 +1,6 @@
 
-import {IPlaceModel} from "../../Models/PlaceModel"
+import {IPlaceModel,ICinemaActionModel} from "../../Models/PlaceModel"
+import {IAddCinemaAction} from "../../Models/CinemaModel"
 import {EActionTypes} from "../ActionTypes/ActionTypes"
 import {IstateEditCinema} from "../../Models/CinemaModel"
 
@@ -15,7 +16,7 @@ const defaultStateEdit:IstateEditCinema = {
     
 }
 
-export const reducerAddCinema = (state:Array<IPlaceModel> = [] , action:any)=>{
+export const reducerAddCinema = (state:Array<IPlaceModel> = [] , action:IAddCinemaAction)=>{
     let state2 = state
 
     switch(action.type){
@@ -23,16 +24,22 @@ export const reducerAddCinema = (state:Array<IPlaceModel> = [] , action:any)=>{
        
          return  [...state2,action.data]
          case EActionTypes.EDIT_CINEMA_DETAIL :
-          return       [
+             if (action.index) {
+                return       [
                     ...state2.slice(0,action.index),action.data,
                    ...state2.slice(action.index+1)
                  ]
+             }
+         
                  case EActionTypes.DELETE_CINEMA:
-                  return  [
-                        ...state2.slice(0,action.index),
-                       ...state2.slice(action.index+1)
-                     ] 
-
+                    if (action.index) {
+                        return  [
+                            ...state2.slice(0,action.index),
+                           ...state2.slice(action.index+1)
+                         ] 
+    
+                    }
+               
         default:
             return state
     }
@@ -42,7 +49,7 @@ export const reducerAddCinema = (state:Array<IPlaceModel> = [] , action:any)=>{
 
 //export interface editModel extends Array<IPlaceModel>
 
-export const reducerEditCinema = (state:IstateEditCinema = defaultStateEdit , action:any) =>{
+export const reducerEditCinema = (state:IstateEditCinema = defaultStateEdit , action:ICinemaActionModel) =>{
     switch(action.type){
          case EActionTypes.EDIT_CINEMA:
              return action.data

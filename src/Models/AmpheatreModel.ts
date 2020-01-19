@@ -8,7 +8,18 @@ export interface IApheatreModel {
     svgTranslate: ISalonModel
 }
 
+
+export interface IAmphitheatreActionModel {
+   data: IApheatreModel
+   type: string
+}
+
 export interface IAnAmphitheatreModel extends IApheatreModel{
     index:number
  
+}
+
+export interface IAmphiActionModel {
+    data: IAnAmphitheatreModel
+    type: string
 }

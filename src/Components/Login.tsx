@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {withRouter, RouteComponentProps} from "react-router-dom";
 
-interface IProps extends RouteComponentProps<any> {
+interface IProps {
     /* Parent component's props*/
 }
 
@@ -19,4 +19,4 @@ class Login extends Component<IProps, IState> {
     }
 }
 
-export default withRouter(Login)
+export default Login

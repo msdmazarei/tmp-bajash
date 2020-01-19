@@ -1,4 +1,4 @@
-import {IAnAmphitheatreModel} from "../../Models/AmpheatreModel"
+import {IAnAmphitheatreModel, IAmphiActionModel} from "../../Models/AmpheatreModel"
 import {EActionTypes} from "../ActionTypes/ActionTypes"
 
 const defaultStateEdit:IAnAmphitheatreModel = {
@@ -14,7 +14,7 @@ const defaultStateEdit:IAnAmphitheatreModel = {
     
 }
 
-export const reducerAmphitheatreForm = (state:IAnAmphitheatreModel = defaultStateEdit , action:any) =>{
+export const reducerAmphitheatreForm = (state:IAnAmphitheatreModel = defaultStateEdit , action:IAmphiActionModel) =>{
     switch(action.type){
          case EActionTypes.AMPHITHEATRE_FORM:
              return action.data

@@ -3,3 +3,9 @@ export interface IPlaceModel {
     description:string,
     address:string
 }
+
+export interface ICinemaActionModel {
+    data:IPlaceModel,
+    index:number,
+    type: string
+}

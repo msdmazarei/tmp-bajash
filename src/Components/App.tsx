@@ -10,7 +10,7 @@ import {PersistGate} from 'redux-persist/integration/react'
 function App() {
     return (
         <Provider store={Store}>
-            <PersistGate loading={null} persistor={persistor}>
+            {/* <PersistGate loading={null} persistor={persistor}> */}
                 <BrowserRouter>
                     <Switch>
                         <Route name="login" path={routes.HOME} exact component={Login}/>
@@ -18,7 +18,7 @@ function App() {
                         <Route component={Main}/>
                     </Switch>
                 </BrowserRouter>
-            </PersistGate>
+            {/* </PersistGate> */}
         </Provider>
     );
 }

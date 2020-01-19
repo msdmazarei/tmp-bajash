@@ -7,13 +7,14 @@ import {mapDispatchToProps} from "../Redux/MapDispatchToProps/MapDispatchToProps
 import {mapStateToProps} from "../Redux/MapStateToProps/MapStateToProps"
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import {IstateEditCinema} from "../Models/CinemaModel"
+import * as H from 'history'
 
 
-interface IProps extends RouteComponentProps<any> {
+interface IProps extends RouteComponentProps {
   onEditCinema(data:IstateEditCinema):void,
       dataList:Array<IPlaceModel>,
      route : string,
-     addItem(history:any):void,
+     addItem(history: H.History):void,
      editItem (cinema:IPlaceModel,index:number):void
   
   }
@@ -67,13 +68,13 @@ render() {
                     </td>
                     <td> 
                 <Button variant="outline-info" onClick={()=>this.handleEdit(item,index)}>{ETranslator.EDIT}</Button>
-                       {/* <Link to={`${this.props.route}/:${item.name}`}> edit</Link> */}
+                    
                        </td>
                    
                 
                   </tr>
                 )
-            }):""}
+            }):null}
  
   </tbody>
 </Table>
