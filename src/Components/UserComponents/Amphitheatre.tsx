@@ -17,7 +17,6 @@ import {Dispatch} from "redux"
 interface IProps extends RouteComponentProps<any> {
 	addAmphitheatre(data:IApheatreModel): void
 	amphitheatre:IAnAmphitheatreModel
-
 }
 
 interface IState {
@@ -25,25 +24,21 @@ interface IState {
 	chair: number,
 	floor: number,
 	cinema: string,
-	svgTranslate: ISalonModel
-	
+	svgTranslate: ISalonModel	
 }
-
-
-
 
 class Amphitheatre1 extends Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props)
-		this.state = {
-			name: this.props.amphitheatre.name,
-			chair: this.props.amphitheatre.chair,
-			floor: this.props.amphitheatre.floor,
-			cinema: this.props.amphitheatre.cinema,
-			svgTranslate:  {id:"",
-			name: "",
-			plan :[]
-		}
+			this.state = {
+				name: this.props.amphitheatre.name,
+				chair: this.props.amphitheatre.chair,
+				floor: this.props.amphitheatre.floor,
+				cinema: this.props.amphitheatre.cinema,
+				svgTranslate:  {id:"",
+				name: "",
+				plan :[]
+			}
 		}
 	}
 
@@ -59,7 +54,6 @@ class Amphitheatre1 extends Component<IProps, IState> {
 				return this.setState({ chair: newValue })
 			default: return
 		}
-
 	}
 
 	submitForm = () => {
@@ -67,13 +61,11 @@ class Amphitheatre1 extends Component<IProps, IState> {
 		const newAmphi: IApheatreModel= { name: name, floor: floor, chair: chair, svgTranslate:svgTranslate ,cinema:this.props.amphitheatre.cinema }
 		this.props.addAmphitheatre(newAmphi)
 		this.props.history.replace(`/cinemas`)
-
-		// console.log("hello")
 	}
 
 	controlEmpty = () => {
-		const { name, chair, floor ,svgTranslate} = this.state
-		if (name === "" || chair === 0 || floor === 0 ||svgTranslate.id==="") {
+		const { name, chair, floor, svgTranslate } = this.state
+		if (name === "" || chair === 0 || floor === 0 || svgTranslate.id === "") {
 			return true
 		}
 		return false
@@ -92,14 +84,12 @@ class Amphitheatre1 extends Component<IProps, IState> {
 				<Button onClick={this.handleCancel} variant="secondary">{ETranslator.CANCEL}</Button>
 
 			</ButtonToolbar>
-
 		)
 	}
 
 	editButton = () => {
 		return (
 			<div>
-
 				<ButtonToolbar>
 					<Button
 						//  disabled={this.controlEmpty()} 
@@ -112,7 +102,6 @@ class Amphitheatre1 extends Component<IProps, IState> {
 					<Button className="margin-button" variant="secondary" onClick={this.handleCancel}>{ETranslator.CANCEL}</Button>
 
 				</ButtonToolbar>
-
 			</div>
 		)
 	}
@@ -141,26 +130,17 @@ class Amphitheatre1 extends Component<IProps, IState> {
 	}
 
 	translateSVG(s:string) {
-
 		const parser = new DOMParser()
 		const doc = parser.parseFromString(s, "application/xml");
 		let nodeList = doc.querySelectorAll('[id^=s]')
 		this.createSaloonData(nodeList)	
 	}
 
-
 	createSaloonData(e:any) {
-		
 		let saloonData :ISalonModel = {id:"",
-	name: "",
-	plan :[]
-}
-		// = {
-		// 		id: "",
-		// 		name: "",
-		// 		plan : [{id: "", name:"", chairs:[{id:"", tag:"" }]}]
-		//	}
-	
+		name: "",
+		plan :[]
+	}
 
 		let saloonList: Array<string>=[]
 		let zoneList :Array<Array<string>> =[]
@@ -204,23 +184,16 @@ class Amphitheatre1 extends Component<IProps, IState> {
 		this.setState({svgTranslate:saloonData})
 	}
 
-	addChair(id:string, list:Array<Array<string>>) {
-	
+	addChair(id:string, list:Array<Array<string>>) {	
 		if (list.length>0) {
 			let newChairs= [] 
 			for (let property of list) {
-				
 				if (property[1]===id){
 					newChairs.push({id:property[2], tag:""})
 				}
 			} 
 			return newChairs
-
 		}
-		
-
-		
-
 	}
 	
 	myinp: any | null = null;
@@ -228,7 +201,6 @@ class Amphitheatre1 extends Component<IProps, IState> {
     previewContainer: HTMLElement | null = null;
 
 	render() {
-		
 		return (
 			<div>
 				<h3>{ETranslator.CINEMA_NAME}: {this.props.amphitheatre.cinema}</h3>
@@ -284,9 +256,7 @@ class Amphitheatre1 extends Component<IProps, IState> {
 								<div
 									className="prewiev-plan"
 									ref={(e) => this.previewContainer = e}
-								>
-									
-								</div>
+								></div>
 								{/* <Form.Label>{ETranslator.UPLOAD_PLAN}</Form.Label>
 								<Form.Control
 									type="file"
@@ -306,20 +276,16 @@ class Amphitheatre1 extends Component<IProps, IState> {
 	}
 }
 
-const mapDispatchToProps= (dispatch:Dispatch)=>{
-    return{
-     
-        addAmphitheatre :(data:IApheatreModel)=>{
-            
+const mapDispatchToProps= (dispatch:Dispatch) => {
+    return {
+        addAmphitheatre :(data:IApheatreModel) => { 
             dispatch(addAmphitheatre(data))
-        
-        
-        },
-       
-}}
- const mapStateToProps = (state:IStoreRedux) =>{
-    return{amphitheatre:state.amphitheatre}
+        }
+	}
 }
 
-export const Amphitheatre = connect(mapStateToProps, mapDispatchToProps)(withRouter(Amphitheatre1));
+const mapStateToProps = (state:IStoreRedux) => {
+    return {amphitheatre:state.amphitheatre}
+}
 
+export const Amphitheatre = connect(mapStateToProps, mapDispatchToProps)(withRouter(Amphitheatre1))
