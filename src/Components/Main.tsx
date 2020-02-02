@@ -7,6 +7,7 @@ import {NewCinema} from "./UserComponents/NewCinema"
 import {Header} from "./Header"
 import {Container} from "react-bootstrap"
 import {Amphitheatre} from "./UserComponents/Amphitheatre"
+import {CustomForm} from './UserComponents/FormTestPage'
 
 interface IProps {}
 
@@ -24,6 +25,7 @@ export class Main extends Component<IProps, IState> {
                             <Route path={routes.CINEMA} component={NewCinema}/>
                             <Route path={routes.NEW_CINEMA} component={NewCinema}/>
                             <Route path={routes.NEW_AMPHITHEATRE} component={Amphitheatre}/>
+                            <Route path={routes.FORM} component={CustomForm}/>
                             <Route name="unavailable" component={Unavailable}/>
                         </Switch>
                     </BrowserRouter>

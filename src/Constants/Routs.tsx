@@ -7,5 +7,6 @@ export enum routes  {
     TAGS = "/tags",
     SCHADULES  = "/schadules",
     NEW_AMPHITHEATRE = "/cinema/newAmphitheatre",
-    LOGIN = "/login"
+    LOGIN = "/login",
+    FORM = '/form-test'
 }
