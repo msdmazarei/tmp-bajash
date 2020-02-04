@@ -1,66 +1,51 @@
 import React, { Component } from "react"
-import { Nav, Navbar } from "react-bootstrap"
-import { navbarList, INavbarModel } from "../Models/NavbarModel"
-import { baseData } from "../config"
-import { IFormDataModel, IFormElementDataModel } from "../Models/FormDataModel"
-import InputComponent from './FormElements/InputComponent'
-import SelectComponent from './FormElements/SelectComponent'
-import TextareaComponent from './FormElements/TextareaComponent'
-import CheckboxComponent from './FormElements/CheckboxComponent'
-import RadioComponent from './FormElements/RadioComponent'
+import InputComponent from "./FormElements/InputComponent"
 
-interface IProps extends IFormDataModel {}
-interface IState {}
+interface FormElData {
+    name: string,
+    value: string
+}
 
-export class CustomFormComp extends Component<IProps,IState> {
-    constructor(props:IProps){
+interface Istate {
+    formData: {
+        [key: string]: FormElData
+    }
+}
+
+interface IProps {
+    children: (change:any) => JSX.Element
+}
+
+class CustomFormComp extends Component<IProps, Istate> {
+    state = {
+        formData: {}
+    }
+
+    constructor(props: IProps) {
         super(props)
+        this.handleInputChange = this.handleInputChange.bind(this)
     }
 
-    iterateFormElements = () => {
-        const items = this.props.items
-        const item:(Element | undefined)[] = items.map((i:IFormElementDataModel) => {
-            const el:string = i.element
+    handleInputChange(inputData: FormElData) {
+        const newFormData:any = {...this.state.formData}
+        // if(newFormData[inputData.name] === undefined) {
+            newFormData[inputData.name] = inputData
+        // }
 
-            switch (el) {
-                case 'select':
-                    return (
-                        <SelectComponent elementData={i} />
-                    )
-            
-                case 'input':
-                    return (
-                        <InputComponent elementData={i} />
-                    )
-            
-                case 'checkbox':
-                    return (
-                        <CheckboxComponent elementData={i} />
-                    )
-            
-                case 'radio':
-                    return (
-                        <RadioComponent elementData={i} />
-                    )
-            
-                case 'textarea':
-                    return (
-                        <TextareaComponent elementData={i} />
-                    )
-            }
+        this.setState({
+            formData: newFormData
         })
-
-        return item
     }
-
 
     render() {
         return (
-            <form action="">
-                {
-                    this.iterateFormElements()
-                }
+            <form>
+                {this.props.children(this.handleInputChange)}
+
+                {console.log(this.state)}
             </form>
         )
     }
 }
+
+export default CustomFormComp
