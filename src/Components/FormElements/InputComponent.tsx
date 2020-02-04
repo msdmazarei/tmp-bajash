@@ -25,7 +25,7 @@ class InputComponent extends React.Component<inputData> {
     const name:string = this.props.name
 
     return (
-      <fieldset style={{direction: 'ltr'}}>
+      <fieldset>
         <label>
           {this.props.label}
           <input name={name} value={value} onChange={this.handleChange} />

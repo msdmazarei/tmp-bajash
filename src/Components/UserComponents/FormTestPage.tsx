@@ -20,6 +20,7 @@ export class CustomForm extends Component<IProps, IState> {
                                         <InputComponent label='phone: ' name='phone' handleChange={handleInputChange} />
                                     </div>
                                 </div>
+                                <button type="submit">submit</button>
                             </>
                         )
                     }}

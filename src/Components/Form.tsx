@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import InputComponent from "./FormElements/InputComponent"
 
 interface FormElData {
     name: string,
@@ -8,7 +7,7 @@ interface FormElData {
 
 interface Istate {
     formData: {
-        [key: string]: FormElData
+        [key: string]: string
     }
 }
 
@@ -24,25 +23,27 @@ class CustomFormComp extends Component<IProps, Istate> {
     constructor(props: IProps) {
         super(props)
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleInputChange(inputData: FormElData) {
         const newFormData:any = {...this.state.formData}
-        // if(newFormData[inputData.name] === undefined) {
-            newFormData[inputData.name] = inputData
-        // }
+        newFormData[inputData.name] = inputData
 
         this.setState({
             formData: newFormData
         })
     }
 
+    handleSubmit(event: React.FormEvent) {
+        event.preventDefault()
+        console.log(this.state)
+    }
+
     render() {
         return (
-            <form>
+            <form style={{direction: 'ltr'}} onSubmit={this.handleSubmit}>
                 {this.props.children(this.handleInputChange)}
-
-                {console.log(this.state)}
             </form>
         )
     }
