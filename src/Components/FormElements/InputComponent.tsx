@@ -4,17 +4,17 @@ interface inputData {
   name: string,
   label: string,
   value?: string,
-  handleChange(e:any): void
+  onChange?(e:any): void
 }
 
 class InputComponent extends React.Component<inputData> {
   constructor(props:inputData) {
     super(props)
-    this.handleChange = this.handleChange.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
-  handleChange(e:any) {
-    this.props.handleChange({
+  onChange(e:any) {
+    this.props.onChange && this.props.onChange({
       name: this.props.name,
       value: e.target.value
     })
@@ -28,7 +28,7 @@ class InputComponent extends React.Component<inputData> {
       <fieldset>
         <label>
           {this.props.label}
-          <input name={name} value={value} onChange={this.handleChange} />
+          <input name={name} value={value} onChange={this.onChange} />
         </label>
       </fieldset>
     )

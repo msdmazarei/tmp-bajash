@@ -6,26 +6,23 @@ interface IState { }
 
 interface IProps {}
 
+interface FormElData {
+    [key: string]: string
+}
+
 export class CustomForm extends Component<IProps, IState> {
     render() {
+        const formData:FormElData = {
+            email: "homam.ghassemy@gmail.com",
+            phone: "sdfsdf",
+            address: "asdhf akshdfkahsdkahsdflka hsfnasdk f"
+        }
+
         return (
-            <div>
-                <CustomFormComp>
-                    {(handleInputChange) => {
-                        return (
-                            <>
-                                <div>
-                                    <InputComponent label='email: ' name='email' handleChange={handleInputChange} />
-                                    <div>
-                                        <InputComponent label='phone: ' name='phone' handleChange={handleInputChange} />
-                                    </div>
-                                </div>
-                                <button type="submit">submit</button>
-                            </>
-                        )
-                    }}
-                </CustomFormComp>
-            </div>
+            <CustomFormComp FormData={formData}>
+                <InputComponent label='email: ' name='email' />
+                <InputComponent label='phone: ' name='phone' />
+            </CustomFormComp>
         )
     }
 }
