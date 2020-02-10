@@ -18,11 +18,24 @@ export class CustomForm extends Component<IProps, IState> {
             address: "asdhf akshdfkahsdkahsdflka hsfnasdk f"
         }
 
+        const test = {}
+
         return (
-            <CustomFormComp FormData={formData}>
-                <InputComponent label='email: ' name='email' />
-                <InputComponent label='phone: ' name='phone' />
-            </CustomFormComp>
+            <>
+                <h2>filled form example</h2>
+                <CustomFormComp FormData={formData}>
+                    <InputComponent label='email: ' name='email' />
+                    <InputComponent label='phone: ' name='phone' />
+                </CustomFormComp>
+
+                <hr/>
+               
+                <h2>empty form example</h2>
+                <CustomFormComp FormData={test}>
+                    <InputComponent label='home phone: ' name='home' />
+                    <InputComponent label='work phone: ' name='work' />
+                </CustomFormComp>
+            </>
         )
     }
 }

@@ -1,78 +1,46 @@
 import React, { Component, ReactNode } from "react"
+import { type } from "os"
 
 interface FormElData {
     [key: string]: string
 }
 
-interface Istate {
-    formData: {
+interface IState {
+    FormData: {
         [key: string]: string
     }
 }
 
 interface IProps {
     FormData: FormElData
-    //   children: React.ReactNode[]
     children: any[]
 }
 
-class CustomFormComp extends Component<IProps, Istate> {
+class CustomFormComp extends Component<IProps, IState> {
     state = {
-        formData: {},
-        VDOM: []
+        FormData: {}
     }
 
     constructor(props: IProps) {
         super(props)
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    log_all_recursive_func(c: Array<any>) {
-        // this goes down virtual dom tree recursivly to do any thing you would like
-        // debugger
-        for (let item of c) {
-            if (item && item.type && item.type.name) {
-                // console.log(item, item.type)
-            }
-
-            if (item.props && item.props.children && item.props.children.length > 0) {
-                this.log_all_recursive_func(item.props.children)
-            }
-            // console.log(item?.type?.name)
-        }
-    }
-
-    addChangeHandler(children: Array<any>, propToIterate: Array<any>) {
-        console.log(children)
-
-        for (let child of children) {
-            // console.log(child)
-            if (child.props && child.props.children && child.props.children.length) {
-                // console.log(child)
-                this.addChangeHandler(child.props.children, [])
-            }
-
-            if (child?.type?.name) {
-                // console.log(child)
-                // child.props.handleChange = this.handleInputChange
-            }
-        }
+        this.state.FormData = this.props.FormData
     }
 
     componentDidMount() {
         this.setState({
-            formData: this.props.FormData
+            FormData: this.props.FormData
         })
     }
 
     handleInputChange(inputData: FormElData) {
-        const newFormData: any = { ...this.state.formData }
+        const newFormData: any = { ...this.state.FormData }
         newFormData[inputData.name] = inputData.value
 
         console.log(newFormData)
         this.setState({
-            formData: newFormData
+            FormData: newFormData
         })
     }
 
@@ -82,16 +50,26 @@ class CustomFormComp extends Component<IProps, Istate> {
     }
 
     render() {
+        // console.log('state', this.state)
+
         const newChildren = (this.props.children || []).map((child: any, index: number) => {
+            let value: string
+            if(this.state.FormData && (this.state.FormData as any)[child.props.name]) {
+                value = (this.state.FormData as any)[child.props.name]
+            } else {
+                value = ""
+            }
+            
+            // console.log('child prop name', child.props.name)
             return React.cloneElement(child, {
                 onChange: this.handleInputChange.bind(this),
-                key: index
+                key: index,
+                value: value
             })
         })
 
         return (
             <form style={{ direction: "ltr" }} onSubmit={this.handleSubmit}>
-                {/* {this.props.children} */}
                 {newChildren}
             </form>
         )
